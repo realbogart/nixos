@@ -32,7 +32,7 @@ in
 
     shellAliases = {
       ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
+      update = "sudo nixos-rebuild switch --flake /etc/nixos#default";
     };
   };
 
