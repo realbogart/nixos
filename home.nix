@@ -1,5 +1,13 @@
 { config, pkgs, ... }:
 
+let
+  nvimConfig = pkgs.fetchFromGitHub {
+    owner = "realbogart";
+    repo = "nvim";
+    rev = "aeddf23b37cf919ac6a7b36e865d9cd626cb040c";
+    sha256 = "0jqvfpvzp4jyzskvyl3jnkmwxdrn16ym5ram1bbblxar8ywnjhkb";
+  };
+in
 {
   home.username = "johan";
   home.homeDirectory = "/home/johan";
@@ -9,6 +17,8 @@
     unzip
     ripgrep
     fzf
+    clang
+    gnumake
   ];
 
   programs.git = {
@@ -20,9 +30,18 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    bashrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-    '';
+  };
+
+# ln -s $SCRIPTPATH/.bashrc ~/.bashrc
+# ln -s $SCRIPTPATH/.zshrc ~/.zshrc
+# ln -s $SCRIPTPATH/nvim ~/.config
+# ln -s $SCRIPTPATH/nvim/.vimrc ~/.vimrc
+# ln -s $SCRIPTPATH/tmux ~/.config
+# ln -s $SCRIPTPATH/starship.toml ~/.config
+# ln -s $SCRIPTPATH/git ~/.config
+
+  home.file = {
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
   };
 
   # This value determines the home Manager release that your
