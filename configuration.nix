@@ -9,12 +9,11 @@
 
 {
   imports = [
-    # include NixOS-WSL modules
-    # <nixos-wsl/modules>
   ];
 
   wsl.enable = true;
   wsl.defaultUser = "johan";
+  wsl.wslConf.interop.appendWindowsPath = false;
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -22,6 +21,9 @@
     git
     neovim
   ];
+
+  programs.zsh.enable = true;
+  users.users.johan.shell = pkgs.zsh;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

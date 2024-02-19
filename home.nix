@@ -21,29 +21,25 @@ in
     gnumake
   ];
 
-  programs.git = {
+  programs.starship.enable = true;
+  programs.zsh = {
     enable = true;
-    userName = "Johan Yngman";
-    userEmail = "johan.yngman@gmail.com";
-  };
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" "zsh-autosuggestions" "zsh-vi-mode" ];
+      theme = "robbyrussell";
+    };
 
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
+    shellAliases = {
+      ll = "ls -l";
+      update = "sudo nixos-rebuild switch";
+    };
   };
-
-# ln -s $SCRIPTPATH/.bashrc ~/.bashrc
-# ln -s $SCRIPTPATH/.zshrc ~/.zshrc
-# ln -s $SCRIPTPATH/nvim ~/.config
-# ln -s $SCRIPTPATH/nvim/.vimrc ~/.vimrc
-# ln -s $SCRIPTPATH/tmux ~/.config
-# ln -s $SCRIPTPATH/starship.toml ~/.config
-# ln -s $SCRIPTPATH/git ~/.config
 
   home.file = {
     ".bashrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.bashrc";
     ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.zshrc";
-    ".vimrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim/.vimrc";
+    ".vimrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim/vimrc.vim";
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
     ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/tmux";
     ".config/git".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/git";
