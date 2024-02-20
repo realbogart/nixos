@@ -1,14 +1,4 @@
-{ config, pkgs, ... }:
-
-let
-  nvimConfig = pkgs.fetchFromGitHub {
-    owner = "realbogart";
-    repo = "nvim";
-    rev = "aeddf23b37cf919ac6a7b36e865d9cd626cb040c";
-    sha256 = "0jqvfpvzp4jyzskvyl3jnkmwxdrn16ym5ram1bbblxar8ywnjhkb";
-  };
-in
-{
+{ config, pkgs, ... }: {
   home.username = "johan";
   home.homeDirectory = "/home/johan";
 
@@ -19,6 +9,7 @@ in
     fzf
     clang
     gnumake
+    tmux
   ];
 
   programs.starship.enable = true;
@@ -37,6 +28,11 @@ in
   };
 
   home.file = {
+    ".tmux/plugins/tpm".source = builtins.fetchGit {
+      url = "https://github.com/tmux-plugins/tpm.git";
+      rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
+    };
+
     ".bashrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.bashrc";
     ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.zshrc";
     ".vimrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim/vimrc.vim";
@@ -59,3 +55,4 @@ in
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
+
