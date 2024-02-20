@@ -23,9 +23,34 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "zsh-autosuggestions" "zsh-vi-mode" ];
+      plugins = [ "git" ];
       theme = "robbyrussell";
     };
+
+    plugins = [
+      {
+        name = "zsh-autosuggestions";
+        src = pkgs.fetchFromGitHub {
+          owner = "zsh-users";
+          repo = "zsh-autosuggestions";
+          rev = "v0.7.0";
+          sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
+        };
+      }
+      {
+        name = "zsh-vi-mode";
+        src = pkgs.fetchFromGitHub {
+          owner = "jeffreytse";
+          repo = "zsh-vi-mode";
+          rev = "v0.11.0";
+          sha256 = "sha256-xbchXJTFWeABTwq6h4KWLh+EvydDrDzcY9AQVK65RS8=";
+        };
+      }
+    ];
+
+    initExtra = ''
+      export ZVM_VI_INSERT_ESCAPE_BINDKEY="kj"
+    '';
 
     shellAliases = {
       ll = "ls -l";
@@ -39,8 +64,6 @@
       rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
     };
 
-    ".bashrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.bashrc";
-    # ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.zshrc";
     ".vimrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim/vimrc.vim";
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
     ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/tmux";
