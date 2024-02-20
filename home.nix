@@ -10,6 +10,7 @@
     clang
     gnumake
     tmux
+    bitwarden-cli
   ];
 
   programs.starship = {
@@ -50,7 +51,13 @@
 
     initExtra = ''
       export ZVM_VI_INSERT_ESCAPE_BINDKEY="kj"
+      source ${pkgs.fzf}/share/fzf/key-bindings.zsh
     '';
+
+    # Not yet working
+    # envExtra = ''
+    #   source ${pkgs.fzf}/share/fzf/key-bindings.zsh
+    # '';
 
     shellAliases = {
       ll = "ls -l";
