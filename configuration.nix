@@ -22,8 +22,9 @@
     neovim
   ];
 
+  users.defaultUserShell = pkgs.zsh;
+  environment.shells = [ pkgs.zsh ];
   programs.zsh.enable = true;
-  users.users.johan.shell = pkgs.zsh;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
