@@ -54,11 +54,6 @@
       source ${pkgs.fzf}/share/fzf/key-bindings.zsh
     '';
 
-    # Not yet working
-    # envExtra = ''
-    #   source ${pkgs.fzf}/share/fzf/key-bindings.zsh
-    # '';
-
     shellAliases = {
       ll = "ls -l";
       update = "sudo nixos-rebuild switch --flake /etc/nixos#default";
@@ -88,7 +83,6 @@
   # changes in each release.
   home.stateVersion = "23.11";
 
-  # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
 
