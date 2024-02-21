@@ -10,7 +10,7 @@
     clang
     gnumake
     tmux
-    bitwarden-cli
+    nil
   ];
 
   programs.starship = {
