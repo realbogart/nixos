@@ -35,5 +35,19 @@
 	      }
           ];
         };
+      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {inherit inputs;};
+          modules = [ 
+            ./configuration-desktop.nix
+	    NixOS-WSL.nixosModules.wsl
+	      home-manager.nixosModules.home-manager
+	      {
+		home-manager.useGlobalPkgs = true;
+		home-manager.useUserPackages = true;
+		home-manager.users.johan = import ./home.nix;
+	      }
+          ];
+        };
     };
 }
