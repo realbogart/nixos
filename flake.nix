@@ -19,6 +19,11 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      johan-home = {
+	home-manager.useGlobalPkgs = true;
+	home-manager.useUserPackages = true;
+	home-manager.users.johan = import ./home.nix;
+      };
     in
     {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
@@ -27,12 +32,7 @@
           modules = [ 
             ./configuration.nix
 	    NixOS-WSL.nixosModules.wsl
-	      home-manager.nixosModules.home-manager
-	      {
-		home-manager.useGlobalPkgs = true;
-		home-manager.useUserPackages = true;
-		home-manager.users.johan = import ./home.nix;
-	      }
+	    home-manager.nixosModules.home-manager johan-home
           ];
         };
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
@@ -40,13 +40,7 @@
           specialArgs = {inherit inputs;};
           modules = [ 
             ./configuration-desktop.nix
-	    NixOS-WSL.nixosModules.wsl
-	      home-manager.nixosModules.home-manager
-	      {
-		home-manager.useGlobalPkgs = true;
-		home-manager.useUserPackages = true;
-		home-manager.users.johan = import ./home.nix;
-	      }
+	    home-manager.nixosModules.home-manager johan-home
           ];
         };
     };
