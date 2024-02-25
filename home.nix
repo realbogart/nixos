@@ -11,6 +11,7 @@
     gnumake
     tmux
     nil
+    brave
   ];
 
   programs.starship = {
