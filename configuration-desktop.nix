@@ -85,9 +85,6 @@
     description = "Johan Yngman";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
-      kate
-    #  thunderbird
     ];
   };
 
@@ -100,6 +97,8 @@
     neovim
     git
     wget
+    qjackctl
+    lm_sensors
   ];
 
   users.defaultUserShell = pkgs.zsh;
