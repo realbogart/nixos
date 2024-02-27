@@ -11,11 +11,6 @@
     gnumake
     tmux
     nil
-
-    # Desktop apps
-    brave
-    discord
-    flameshot
   ];
 
   programs.starship = {

@@ -56,9 +56,6 @@
   # Configure console keymap
   console.keyMap = "sv-latin1";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -100,6 +97,11 @@
     wget
     qjackctl
     lm_sensors
+    
+    # Desktop apps
+    brave
+    discord
+    flameshot
   ];
 
   users.defaultUserShell = pkgs.zsh;
