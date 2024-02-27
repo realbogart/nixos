@@ -19,10 +19,10 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      johan-home = {
+      johan-home = { configName ? "default" }: {
 	home-manager.useGlobalPkgs = true;
 	home-manager.useUserPackages = true;
-	home-manager.users.johan = import ./home.nix;
+	home-manager.users.johan = import ./home.nix configName;
       };
     in
     {
@@ -32,7 +32,7 @@
           modules = [ 
             ./configuration.nix
 	    NixOS-WSL.nixosModules.wsl
-	    home-manager.nixosModules.home-manager johan-home
+	    home-manager.nixosModules.home-manager (johan-home {})
           ];
         };
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
@@ -40,7 +40,7 @@
           specialArgs = {inherit inputs;};
           modules = [ 
             ./configuration-desktop.nix
-	    home-manager.nixosModules.home-manager johan-home
+	    home-manager.nixosModules.home-manager (johan-home { configName = "desktop"; })
           ];
         };
     };

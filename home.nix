@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+configName: { config, pkgs, ... }: {
   home.username = "johan";
   home.homeDirectory = "/home/johan";
 
@@ -53,11 +53,12 @@
     initExtra = ''
       export ZVM_VI_INSERT_ESCAPE_BINDKEY="kj"
       source ${pkgs.fzf}/share/fzf/key-bindings.zsh
+      zstyle ':bracketed-paste-magic' active-widgets '.self-*'
     '';
 
     shellAliases = {
       ll = "ls -l";
-      update = "sudo nixos-rebuild switch --flake /etc/nixos#default";
+      update = "sudo nixos-rebuild switch --flake ~/nixos#${configName}";
     };
   };
 
