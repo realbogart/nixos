@@ -12,7 +12,14 @@ configName: { config, pkgs, ... }: {
     tmux
     nil
     xsel 
+    syncthing
   ];
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
 
   programs.starship = {
     enable = true;
