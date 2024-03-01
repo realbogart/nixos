@@ -13,6 +13,8 @@ configName: { config, pkgs, ... }: {
     nil
     xsel 
     syncthing
+    nixfmt
+    stylua
   ];
 
   programs.direnv = {
