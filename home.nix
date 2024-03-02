@@ -1,4 +1,5 @@
-configName: { config, pkgs, ... }: {
+configName:
+{ config, pkgs, ... }: {
   home.username = "johan";
   home.homeDirectory = "/home/johan";
 
@@ -11,12 +12,13 @@ configName: { config, pkgs, ... }: {
     gnumake
     tmux
     nil
-    xsel 
+    xsel
     syncthing
     nixfmt
     stylua
     s3cmd
     gnupg
+    fdupes
   ];
 
   programs.direnv = {
@@ -79,12 +81,18 @@ configName: { config, pkgs, ... }: {
       rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
     };
 
-    ".vimrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim/vimrc.vim";
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
-    ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/tmux";
-    ".config/git".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/git";
-    ".config/alacritty".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/alacritty";
-    ".config/startship.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/starship.toml";
+    ".vimrc".source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/nvim/vimrc.vim";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/nvim";
+    ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/tmux";
+    ".config/git".source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/git";
+    ".config/alacritty".source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/alacritty";
+    ".config/startship.toml".source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/starship.toml";
   };
 
   # This value determines the home Manager release that your
