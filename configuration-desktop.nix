@@ -1,11 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
-  
+  imports = [ ./hardware-configuration.nix ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
@@ -81,8 +78,7 @@
     isNormalUser = true;
     description = "Johan Yngman";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -97,7 +93,8 @@
     wget
     qjackctl
     lm_sensors
-    
+    nfs-utils
+
     # Desktop apps
     brave
     discord
@@ -108,6 +105,37 @@
   environment.shells = [ pkgs.zsh ];
   programs.zsh.enable = true;
 
+  fileSystems."/mnt/vault/backup" = {
+    device = "vault.local:/volume1/backup";
+    fsType = "nfs";
+    options = [ "rw" "vers=3" ];
+  };
+
+  fileSystems."/mnt/vault/media" = {
+    device = "vault.local:/volume1/media";
+    fsType = "nfs";
+    options = [ "rw" "vers=3" ];
+  };
+
+  fileSystems."/mnt/vault/music_backup" = {
+    device = "vault.local:/volume1/music_backup";
+    fsType = "nfs";
+    options = [ "rw" "vers=3" ];
+  };
+
+  fileSystems."/mnt/vault/PlexMediaServer" = {
+    device = "vault.local:/volume1/PlexMediaServer";
+    fsType = "nfs";
+    options = [ "rw" "vers=3" ];
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /mnt/vault 0775 johan users - -"
+    "d /mnt/vault/backup 0775 johan users - -"
+    "d /mnt/vault/music_backup 0775 johan users - -"
+    "d /mnt/vault/PlesMediaServer 0775 johan users - -"
+  ];
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -117,6 +145,7 @@
   # };
 
   # List services that you want to enable:
+  # services.nfs.client.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

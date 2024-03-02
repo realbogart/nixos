@@ -15,6 +15,8 @@ configName: { config, pkgs, ... }: {
     syncthing
     nixfmt
     stylua
+    s3cmd
+    gnupg
   ];
 
   programs.direnv = {
