@@ -19,7 +19,11 @@ configName:
     s3cmd
     gnupg
     fdupes
+
+    (pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; })
   ];
+
+  fonts.fontconfig.enable = true;
 
   programs.direnv = {
     enable = true;
@@ -91,8 +95,6 @@ configName:
       "${config.home.homeDirectory}/dotfiles/git";
     ".config/alacritty".source = config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/alacritty";
-    ".config/startship.toml".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dotfiles/starship.toml";
   };
 
   # This value determines the home Manager release that your
