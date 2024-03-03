@@ -22,36 +22,34 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       johan-home = { configName ? "default" }: {
-	home-manager.useGlobalPkgs = true;
-	home-manager.useUserPackages = true;
-	home-manager.users.johan = import ./home.nix configName;
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.users.johan = import ./home.nix configName;
       };
-    in
-    {
+    in {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {inherit inputs;};
-          modules = [ 
-            ./configuration.nix
-	    NixOS-WSL.nixosModules.wsl
-	    home-manager.nixosModules.home-manager (johan-home {})
-            nix-ld.nixosModules.nix-ld
-            { 
-              programs.nix-ld.enable = true; 
-              programs.nix-ld.libraries = with pkgs; [
-                stdenv.cc.cc
-                libz
-              ];
-            }
-          ];
-        };
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          NixOS-WSL.nixosModules.wsl
+          home-manager.nixosModules.home-manager
+          (johan-home { })
+          nix-ld.nixosModules.nix-ld
+          {
+            programs.nix-ld.enable = true;
+            programs.nix-ld.libraries = with pkgs; [ stdenv.cc.cc libz ];
+          }
+        ];
+      };
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {inherit inputs;};
-          modules = [ 
-            ./configuration-desktop.nix
-	    home-manager.nixosModules.home-manager (johan-home { configName = "desktop"; })
-          ];
-        };
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration-desktop.nix
+          home-manager.nixosModules.home-manager
+          (johan-home { configName = "desktop"; })
+        ];
+      };
     };
 }

@@ -1,19 +1,15 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
-  ];
+  imports = [ ];
 
   wsl.enable = true;
   wsl.defaultUser = "johan";
   wsl.wslConf.interop.appendWindowsPath = false;
-  
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  environment.systemPackages = with pkgs; [
-    git
-    neovim
-  ];
+  environment.systemPackages = with pkgs; [ git neovim ];
 
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
