@@ -19,6 +19,7 @@ configName:
     s3cmd
     gnupg
     fdupes
+    rclone
 
     (pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; })
   ];
@@ -38,7 +39,6 @@ configName:
 
   programs.zsh = {
     enable = true;
-    syntaxHighlighting.enable = true;
 
     oh-my-zsh = {
       enable = true;
