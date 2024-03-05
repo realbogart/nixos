@@ -129,11 +129,18 @@
     options = [ "rw" "vers=3" ];
   };
 
+  fileSystems."/mnt/vault/temp" = {
+    device = "vault.local:/volume1/temp";
+    fsType = "nfs";
+    options = [ "rw" "vers=3" ];
+  };
+
   systemd.tmpfiles.rules = [
     "d /mnt/vault 0775 johan users - -"
     "d /mnt/vault/backup 0775 johan users - -"
     "d /mnt/vault/music_backup 0775 johan users - -"
-    "d /mnt/vault/PlesMediaServer 0775 johan users - -"
+    "d /mnt/vault/PlexMediaServer 0775 johan users - -"
+    "d /mnt/vault/temp 0775 johan users - -"
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -145,6 +152,8 @@
   # };
 
   # List services that you want to enable:
+  services.cron.enable = true;
+
   # services.nfs.client.enable = true;
 
   # Enable the OpenSSH daemon.

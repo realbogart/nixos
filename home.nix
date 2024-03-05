@@ -68,9 +68,14 @@ configName:
     ];
 
     initExtra = ''
+      export EDITOR=nvim
       export ZVM_VI_INSERT_ESCAPE_BINDKEY="kj"
       source ${pkgs.fzf}/share/fzf/key-bindings.zsh
       zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+
+      if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+        exec tmux
+      fi
     '';
 
     shellAliases = {
