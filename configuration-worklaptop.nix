@@ -53,6 +53,8 @@
   # Configure console keymap
   console.keyMap = "sv-latin1";
 
+  hardware.bluetooth.enable = true;
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -116,6 +118,7 @@
 
   # List services that you want to enable:
   services.cron.enable = true;
+  services.blueman.enable = true;
 
   # services.nfs.client.enable = true;
 
