@@ -51,5 +51,14 @@
           (johan-home { configName = "desktop"; })
         ];
       };
+      nixosConfigurations.worklaptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration-worklaptop.nix
+          home-manager.nixosModules.home-manager
+          (johan-home { configName = "worklaptop"; })
+        ];
+      };
     };
 }
