@@ -90,8 +90,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     alacritty
-    neovim
-    git
     wget
     qjackctl
     lm_sensors

@@ -9,8 +9,6 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  environment.systemPackages = with pkgs; [ git neovim ];
-
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
   programs.zsh.enable = true;

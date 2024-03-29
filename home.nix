@@ -4,6 +4,8 @@ configName:
   home.homeDirectory = "/home/johan";
 
   home.packages = with pkgs; [
+    neovim
+    git
     zip
     unzip
     ripgrep
