@@ -99,6 +99,7 @@
     brave
     discord
     flameshot
+    spotify
   ];
 
   users.defaultUserShell = pkgs.zsh;

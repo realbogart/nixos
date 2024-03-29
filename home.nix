@@ -20,6 +20,7 @@ configName:
     gnupg
     fdupes
     rclone
+    pkg-config
 
     (pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; })
   ];
