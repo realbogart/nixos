@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ];
+  imports = [ modules/syncthing.nix ];
 
   wsl.enable = true;
   wsl.defaultUser = "johan";

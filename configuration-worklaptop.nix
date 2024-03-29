@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration-worklaptop.nix ];
+  imports = [ ./hardware-configuration-worklaptop.nix modules/syncthing.nix ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
