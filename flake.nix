@@ -31,7 +31,7 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          ./configuration.nix
+          ./configuration-wsl.nix
           NixOS-WSL.nixosModules.wsl
           home-manager.nixosModules.home-manager
           (johan-home { })
