@@ -3,15 +3,42 @@
 {
   imports = [ modules/syncthing.nix ];
 
+<<<<<<< Updated upstream:configuration-wsl.nix
   wsl.enable = true;
   wsl.defaultUser = "johan";
   wsl.wslConf.interop.appendWindowsPath = false;
+=======
+  wsl = {
+    enable = true;
+    defaultUser = "johan";
+    useWindowsDriver = true;
+    wslConf.interop.appendWindowsPath = false;
+  };
+  
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+>>>>>>> Stashed changes:configuration.nix
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
   programs.zsh.enable = true;
+
+  services.jack = {
+    jackd.enable = true;
+    # support ALSA only programs via ALSA JACK PCM plugin
+    alsa.enable = false;
+    # support ALSA only programs via loopback device (supports programs like Steam)
+    loopback = {
+      enable = true;
+      # buffering parameters for dmix device to work with ALSA only semi-professional sound programs
+      #dmixConfig = ''
+      #  period_size 2048
+      #'';
+    };
+  };
+
+  users.extraUsers.johan.extraGroups = [ "jackaudio" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
