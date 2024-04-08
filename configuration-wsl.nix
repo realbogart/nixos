@@ -3,11 +3,6 @@
 {
   imports = [ modules/syncthing.nix ];
 
-<<<<<<< Updated upstream:configuration-wsl.nix
-  wsl.enable = true;
-  wsl.defaultUser = "johan";
-  wsl.wslConf.interop.appendWindowsPath = false;
-=======
   wsl = {
     enable = true;
     defaultUser = "johan";
@@ -15,9 +10,6 @@
     wslConf.interop.appendWindowsPath = false;
   };
   
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
->>>>>>> Stashed changes:configuration.nix
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   users.defaultUserShell = pkgs.zsh;
