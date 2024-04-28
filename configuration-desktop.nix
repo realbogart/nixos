@@ -36,7 +36,7 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   # Enable networking
@@ -115,6 +115,7 @@
     qjackctl
     lm_sensors
     nfs-utils
+    # nvidia-offload
 
     # Desktop apps
     brave

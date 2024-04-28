@@ -10,18 +10,20 @@ configName:
     unzip
     ripgrep
     fzf
+    btop
     clang
     gnumake
     tmux
     nil
     xsel
     syncthing
-    nixfmt
+    nixfmt-classic
     stylua
     s3cmd
     gnupg
     fdupes
     rclone
+    prettierd
     pkg-config
 
     (pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; })
