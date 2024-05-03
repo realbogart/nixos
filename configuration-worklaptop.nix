@@ -48,10 +48,10 @@
   services.xserver = {
     xkb.layout = "se";
     xkb.variant = "nodeadkeys";
+    xkb.options = "caps:nocaps";
   };
 
-  # Configure console keymap
-  console.keyMap = "sv-latin1";
+  console.useXkbConfig = true;
 
   hardware.bluetooth.enable = true;
 
@@ -100,6 +100,7 @@
     discord
     flameshot
     openconnect
+    slack
   ];
 
   users.defaultUserShell = pkgs.zsh;

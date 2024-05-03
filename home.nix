@@ -25,6 +25,7 @@ configName:
     rclone
     prettierd
     pkg-config
+    file
 
     (pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; })
   ];
