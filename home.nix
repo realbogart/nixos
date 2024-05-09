@@ -26,6 +26,9 @@ configName:
     prettierd
     pkg-config
     file
+    hwinfo
+    lshw
+    tree
 
     (pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; })
   ];
