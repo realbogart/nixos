@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ modules/syncthing.nix ];
+  imports = [ ];
 
   wsl = {
     enable = true;
@@ -9,9 +9,11 @@
     useWindowsDriver = true;
     wslConf.interop.appendWindowsPath = false;
   };
-  
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  users.users.johan.extraGroups = [ "docker" ];
+  virtualisation.docker.enable = true;
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
   programs.zsh.enable = true;

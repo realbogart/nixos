@@ -29,6 +29,9 @@ configName:
     hwinfo
     lshw
     tree
+    magic-wormhole
+    btop
+    docker
 
     (pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; })
   ];
