@@ -49,6 +49,11 @@
           ./configuration-desktop.nix
           home-manager.nixosModules.home-manager
           (johan-home { configName = "desktop"; })
+          nix-ld.nixosModules.nix-ld
+          {
+            programs.nix-ld.enable = true;
+            programs.nix-ld.libraries = with pkgs; [ stdenv.cc.cc libz ];
+          }
         ];
       };
       nixosConfigurations.worklaptop = nixpkgs.lib.nixosSystem {
@@ -58,6 +63,11 @@
           ./configuration-worklaptop.nix
           home-manager.nixosModules.home-manager
           (johan-home { configName = "worklaptop"; })
+          nix-ld.nixosModules.nix-ld
+          {
+            programs.nix-ld.enable = true;
+            programs.nix-ld.libraries = with pkgs; [ stdenv.cc.cc libz ];
+          }
         ];
       };
     };

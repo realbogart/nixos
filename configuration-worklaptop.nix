@@ -5,6 +5,8 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  virtualisation.docker.enable = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -79,7 +81,7 @@
   users.users.johan = {
     isNormalUser = true;
     description = "Johan Yngman";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [ ];
   };
 
