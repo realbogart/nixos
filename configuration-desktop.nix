@@ -5,6 +5,8 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  virtualisation.docker.enable = true;
+
   # Binary Cache for Haskell.nix
   nix.settings.trusted-public-keys =
     [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" ];
@@ -100,7 +102,7 @@
   users.users.johan = {
     isNormalUser = true;
     description = "Johan Yngman";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [ ];
   };
 
