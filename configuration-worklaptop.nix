@@ -81,7 +81,7 @@
   users.users.johan = {
     isNormalUser = true;
     description = "Johan Yngman";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "plugdev" ];
     packages = with pkgs; [ ];
   };
 

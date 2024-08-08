@@ -32,6 +32,9 @@ configName:
     magic-wormhole
     btop
     docker
+    signal-desktop
+    helvum
+    carla
 
     (pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; })
   ];
