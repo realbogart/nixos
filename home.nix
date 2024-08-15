@@ -61,32 +61,33 @@ configName:
       theme = "robbyrussell";
     };
 
-    plugins = [
-      {
-        name = "zsh-autosuggestions";
-        src = pkgs.fetchFromGitHub {
-          owner = "zsh-users";
-          repo = "zsh-autosuggestions";
-          rev = "v0.7.0";
-          sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
-        };
-      }
-      {
-        name = "zsh-vi-mode";
-        src = pkgs.fetchFromGitHub {
-          owner = "jeffreytse";
-          repo = "zsh-vi-mode";
-          rev = "v0.11.0";
-          sha256 = "sha256-xbchXJTFWeABTwq6h4KWLh+EvydDrDzcY9AQVK65RS8=";
-        };
-      }
-    ];
+    plugins = [{
+      name = "zsh-autosuggestions";
+      src = pkgs.fetchFromGitHub {
+        owner = "zsh-users";
+        repo = "zsh-autosuggestions";
+        rev = "v0.7.0";
+        sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
+      };
+    }
+    # {
+    #   name = "zsh-vi-mode";
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "jeffreytse";
+    #     repo = "zsh-vi-mode";
+    #     rev = "v0.11.0";
+    #     sha256 = "sha256-xbchXJTFWeABTwq6h4KWLh+EvydDrDzcY9AQVK65RS8=";
+    #   };
+    # }
+      ];
 
     initExtra = ''
       export EDITOR=nvim
       export ZVM_VI_INSERT_ESCAPE_BINDKEY="kj"
       source ${pkgs.fzf}/share/fzf/key-bindings.zsh
       zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+      bindkey '\C-e' edit-command-line
+      echo '\e[5 q'
 
       if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
         exec tmux
