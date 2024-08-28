@@ -15,6 +15,7 @@ configName:
     gnumake
     tmux
     nil
+    vlc
     xsel
     syncthing
     nixfmt-classic
