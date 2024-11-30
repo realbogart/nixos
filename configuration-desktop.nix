@@ -6,6 +6,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   # Binary Cache for Haskell.nix
   nix.settings.trusted-public-keys =
@@ -99,7 +100,17 @@
   users.users.johan = {
     isNormalUser = true;
     description = "Johan Yngman";
-    extraGroups = [ "networkmanager" "wheel" "docker" "plugdev" "audio" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "plugdev"
+      "audio"
+      "ubridge"
+      "qemu-libvirtd"
+      "libvirtd"
+    ];
+
     packages = with pkgs; [ ];
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDcWjSPo+Zu7PKsjPjnTqs7JsUUN3cjs8omPv7DklJbnwKnveAT8TpPlIZE996CptgbJ4AO8rWgiFhxSOrb+KQS4Aej7FQMj9gAcOwPZkdhTAoU2XbYnpFs5roId3+l+mNV/I3oGWCNfOcO4P2OaSXORkk2Gr2mc2lNJAYaWNrkOk68IDZiWjHMbA/JYZMzGSKTyytOAWyVvN1hs5YPrPektyT+r/YbVPxOYrQnK9udBC6/xMt2pvjpdUtnwXsRYBaCXVNQKm9ptASSBA1sVsYByf2KZRaQgV+E7lT9tqwvYlKbVvIcdnvW303GHNl7mAaVb5MtQ67v6TG4CPOK4GJJIJKjsXQYHE8HUioGgZx00OCw7iRJ3WwEKh0VV6FpYiKPVXHSgZSql2e+EXDB7gxK0OC6gdNDGZvLP9OhUWFZBlWm/vFAivsfLWgPT2ARurso7oIntkprwnNwt4XI4khYIFggjEPjHzw3Q+C/ZgqVg9OcaZ8AOMANJ9X/O1F9NjnnXGfLbyvuDAdkjO8zwESaieUZ8jbZqBWdwL3q1IiYAUn9ibKZlRP6pG7ECUSAPVyrDCllfCvLRMSCOdge8xNKYZ0ugE2JPw4c2wyViN0ZIHISmBLDDl0/yADBE+e2yubCbND9J7kL8BkQwyduv7cbR+T06IataZIxn9doPiFD1w== johan@nixos"
@@ -117,13 +128,18 @@
     qjackctl
     lm_sensors
     nfs-utils
+    qemu
     # nvidia-offload
 
     # Desktop apps
     brave
+    firefox
     discord
     flameshot
     spotify
+    wine
+    # vagrant
+    steam
   ];
 
   users.defaultUserShell = pkgs.zsh;
@@ -131,31 +147,31 @@
   programs.zsh.enable = true;
 
   fileSystems."/mnt/vault/backup" = {
-    device = "vault.local:/volume1/backup";
+    device = "192.168.10.253:/volume1/backup";
     fsType = "nfs";
     options = [ "rw" "vers=3" ];
   };
 
   fileSystems."/mnt/vault/media" = {
-    device = "vault.local:/volume1/media";
+    device = "192.168.10.253:/volume1/media";
     fsType = "nfs";
     options = [ "rw" "vers=3" ];
   };
 
   fileSystems."/mnt/vault/music_backup" = {
-    device = "vault.local:/volume1/music_backup";
+    device = "192.168.10.253:/volume1/music_backup";
     fsType = "nfs";
     options = [ "rw" "vers=3" ];
   };
 
   fileSystems."/mnt/vault/PlexMediaServer" = {
-    device = "vault.local:/volume1/PlexMediaServer";
+    device = "192.168.10.253:/volume1/PlexMediaServer";
     fsType = "nfs";
     options = [ "rw" "vers=3" ];
   };
 
   fileSystems."/mnt/vault/temp" = {
-    device = "vault.local:/volume1/temp";
+    device = "192.168.10.253:/volume1/temp";
     fsType = "nfs";
     options = [ "rw" "vers=3" ];
   };
@@ -214,6 +230,38 @@
     passwordAuthentication = false;
     permitRootLogin = "no";
   };
+
+  # security.wrappers.ubridge = {
+  #   source = "/run/wrappers/bin/ubridge";
+  #   capabilities = "cap_net_admin,cap_net_raw=ep";
+  #   owner = "root";
+  #   group = "ubridge";
+  #   # permissions = "u+rx,g+x";
+  #   permissions = "u+rx,g+rx,o+rx";
+  # };
+
+  # services.gns3-server.ubridge.enable = true;
+  # services.gns3-server.enable = true;
+  # services.gns3-server.settings = {
+  #   Server.ubridge_path = pkgs.lib.mkForce "/run/wrappers/bin/ubridge";
+  # };
+  # users.groups.gns3 = { };
+  # users.groups.ubridge = { };
+  # users.users.gns3 = {
+  #   group = "gns3";
+  #   isSystemUser = true;
+  # };
+  # systemd.services.gns3-server.serviceConfig = {
+  #   User = "gns3";
+  #   DynamicUser = pkgs.lib.mkForce false;
+  #   NoNewPrivileges = pkgs.lib.mkForce false;
+  #   RestrictSUIDSGID = pkgs.lib.mkForce false;
+  #   PrivateUsers = pkgs.lib.mkForce false;
+  #   # ExecStart = "${lib.getExe cfg.package} ${commandArgs}";
+  #   DeviceAllow = [ "/dev/net/tun rw" "/dev/net/tap rw" ]
+  #     ++ pkgs.lib.optionals config.virtualisation.libvirtd.enable
+  #     [ "/dev/kvm" ];
+  # };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

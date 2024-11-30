@@ -2,7 +2,9 @@
   description = "Nixos config flake";
 
   inputs = {
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:realbogart/nixpkgs/24.05-johan";
 
     NixOS-WSL = {
       url = "github:nix-community/NixOS-WSL";
@@ -20,7 +22,8 @@
   outputs = { self, nixpkgs, home-manager, NixOS-WSL, nix-ld, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      # pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs { inherit system; };
       johan-home = { configName ? "default" }: {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
@@ -55,8 +58,9 @@
           (johan-home { configName = "desktop"; })
           nix-ld.nixosModules.nix-ld
           {
-            programs.nix-ld.enable = true;
-            programs.nix-ld.libraries = with pkgs; [ stdenv.cc.cc libz ];
+            # programs.nix-ld.enable = true;
+            programs.nix-ld.dev.enable = true;
+            programs.nix-ld.dev.libraries = with pkgs; [ stdenv.cc.cc libz ];
           }
         ];
       };

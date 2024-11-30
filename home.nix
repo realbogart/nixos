@@ -37,7 +37,7 @@ configName:
     helvum
     carla
 
-    (pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; })
+    # (pkgs.nerd-fonts.override { fonts = [ "FiraMono" ]; })
   ];
 
   fonts.fontconfig.enable = true;
