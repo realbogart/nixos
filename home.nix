@@ -6,6 +6,7 @@ configName:
   home.packages = with pkgs; [
     neovim
     git
+    git-lfs
     zip
     unzip
     ripgrep
@@ -36,6 +37,8 @@ configName:
     signal-desktop
     helvum
     carla
+    yaml-language-server
+    wget
 
     # (pkgs.nerd-fonts.override { fonts = [ "FiraMono" ]; })
   ];
