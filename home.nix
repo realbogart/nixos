@@ -39,6 +39,10 @@ configName:
     carla
     yaml-language-server
     wget
+    pinta
+    gimp
+    unrar
+    # virtualbox
 
     # (pkgs.nerd-fonts.override { fonts = [ "FiraMono" ]; })
   ];

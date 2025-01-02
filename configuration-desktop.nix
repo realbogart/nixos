@@ -6,12 +6,23 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   virtualisation.docker.enable = true;
+  virtualisation.virtualbox.host.enable = true;
   virtualisation.libvirtd.enable = true;
 
-  # Binary Cache for Haskell.nix
-  nix.settings.trusted-public-keys =
-    [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" ];
-  nix.settings.substituters = [ "https://cache.iog.io" ];
+  users.extraGroups.vboxusers.members = [ "johan" ];
+
+  nix.settings.extra-trusted-public-keys = [
+    # Binary Cache for Haskell.nix
+    "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+
+    # My binary cache
+    "ams3.digitaloceanspaces.com:EwCAHHfy9VQ3OY7bOtlG9O/TNdAz79EBu7HSJdDcYXc="
+  ];
+  nix.settings.extra-substituters = [
+    "https://cache.iog.io"
+    # "s3://nix-cache-new?endpoint=ams3.digitaloceanspaces.com"
+    "https://nix-cache-new.ams3.digitaloceanspaces.com/"
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -147,31 +158,31 @@
   programs.zsh.enable = true;
 
   fileSystems."/mnt/vault/backup" = {
-    device = "192.168.10.253:/volume1/backup";
+    device = "vault.local:/volume1/backup";
     fsType = "nfs";
     options = [ "rw" "vers=3" ];
   };
 
   fileSystems."/mnt/vault/media" = {
-    device = "192.168.10.253:/volume1/media";
+    device = "vault.local:/volume1/media";
     fsType = "nfs";
     options = [ "rw" "vers=3" ];
   };
 
   fileSystems."/mnt/vault/music_backup" = {
-    device = "192.168.10.253:/volume1/music_backup";
+    device = "vault.local:/volume1/music_backup";
     fsType = "nfs";
     options = [ "rw" "vers=3" ];
   };
 
   fileSystems."/mnt/vault/PlexMediaServer" = {
-    device = "192.168.10.253:/volume1/PlexMediaServer";
+    device = "vault.local:/volume1/PlexMediaServer";
     fsType = "nfs";
     options = [ "rw" "vers=3" ];
   };
 
   fileSystems."/mnt/vault/temp" = {
-    device = "192.168.10.253:/volume1/temp";
+    device = "vault.local:/volume1/temp";
     fsType = "nfs";
     options = [ "rw" "vers=3" ];
   };
