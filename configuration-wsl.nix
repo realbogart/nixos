@@ -12,6 +12,9 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   users.users.johan.extraGroups = [ "docker" ];
   virtualisation.docker.enable = true;
   users.defaultUserShell = pkgs.zsh;
