@@ -42,6 +42,7 @@ configName:
     pinta
     gimp
     unrar
+    nix-prefetch-scripts
     # virtualbox
 
     # (pkgs.nerd-fonts.override { fonts = [ "FiraMono" ]; })

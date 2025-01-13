@@ -148,7 +148,7 @@
     discord
     flameshot
     spotify
-    wine
+    wineWowPackages.stable
     # vagrant
     steam
   ];
