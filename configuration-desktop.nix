@@ -35,6 +35,27 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  networking.wg-quick.interfaces = {
+    wg0 = {
+      address = [ "10.0.0.2/32" ];
+      privateKeyFile = "/home/johan/wg-keys/nixos-private";
+      peers = [{
+        publicKey = "7qNt20uNcwAWR8fj1Xp0+E6VlyopUtmBUFs4KSH9HBE=";
+        allowedIPs = [ "10.0.0.1/32" ];
+        endpoint = "93.177.80.114:51820";
+        persistentKeepalive = 25;
+      }];
+    };
+  };
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.fira-mono
+    nerd-fonts.roboto-mono
+    nerd-fonts.droid-sans-mono
+    nerd-fonts._0xproto
+  ];
+
   # Graphics setup
   hardware.opengl = {
     enable = true;

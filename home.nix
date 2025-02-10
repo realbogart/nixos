@@ -13,6 +13,7 @@ configName:
     fzf
     btop
     clang
+    element-desktop
     gnumake
     tmux
     nil
@@ -43,6 +44,10 @@ configName:
     gimp
     unrar
     nix-prefetch-scripts
+    runc
+    containerd
+    grpcurl
+    wireguard-tools
     # virtualbox
 
     # (pkgs.nerd-fonts.override { fonts = [ "FiraMono" ]; })
