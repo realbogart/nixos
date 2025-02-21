@@ -1,4 +1,4 @@
-configName:
+{ configName, nix-yaml }:
 { config, pkgs, ... }: {
   home.username = "johan";
   home.homeDirectory = "/home/johan";
@@ -48,6 +48,7 @@ configName:
     containerd
     grpcurl
     wireguard-tools
+    nix-yaml.packages.${pkgs.system}.yaml
     # virtualbox
 
     # (pkgs.nerd-fonts.override { fonts = [ "FiraMono" ]; })

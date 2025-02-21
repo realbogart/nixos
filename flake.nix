@@ -2,24 +2,22 @@
   description = "Nixos config flake";
 
   inputs = {
-
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:realbogart/nixpkgs/24.05-johan";
-
     NixOS-WSL = {
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     nix-ld.url = "github:Mic92/nix-ld";
+    nix-yaml.url = "github:realbogart/nix-yaml";
   };
 
-  outputs = { self, nixpkgs, home-manager, NixOS-WSL, nix-ld, ... }@inputs:
+  outputs =
+    { self, nixpkgs, home-manager, NixOS-WSL, nix-ld, nix-yaml, ... }@inputs:
     let
       system = "x86_64-linux";
       # pkgs = nixpkgs.legacyPackages.${system};
@@ -27,7 +25,8 @@
       johan-home = { configName ? "default" }: {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.users.johan = import ./home.nix configName;
+        home-manager.users.johan =
+          import ./home.nix { inherit configName nix-yaml; };
       };
     in {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {

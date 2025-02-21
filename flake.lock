@@ -56,6 +56,24 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -94,6 +112,26 @@
         "type": "github"
       }
     },
+    "nix-yaml": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": "nixpkgs_2",
+        "yaml-src": "yaml-src"
+      },
+      "locked": {
+        "lastModified": 1740171472,
+        "narHash": "sha256-LsWy05fHfjyilpady41nPPCIQ+58DsgRnGgtQfqY24E=",
+        "owner": "realbogart",
+        "repo": "nix-yaml",
+        "rev": "0ca7538fe2d4f3d7fbd25fa6cfb3db9db2fd6f01",
+        "type": "github"
+      },
+      "original": {
+        "owner": "realbogart",
+        "repo": "nix-yaml",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1727634051,
@@ -111,6 +149,22 @@
       }
     },
     "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1740019556,
+        "narHash": "sha256-vn285HxnnlHLWnv59Og7muqECNMS33mWLM14soFIv2g=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "dad564433178067be1fbdfcce23b546254b6d641",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1732758367,
         "narHash": "sha256-RzaI1RO0UXqLjydtz3GAXSTzHkpb/lLD1JD8a0W4Wpo=",
@@ -131,7 +185,8 @@
         "NixOS-WSL": "NixOS-WSL",
         "home-manager": "home-manager",
         "nix-ld": "nix-ld",
-        "nixpkgs": "nixpkgs_2"
+        "nix-yaml": "nix-yaml",
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "systems": {
@@ -146,6 +201,38 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "yaml-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1735619950,
+        "narHash": "sha256-q7L/lxpC6zsoGiNIAdyZXrcgZmegWroUTtKq60K8nXk=",
+        "owner": "eemeli",
+        "repo": "yaml",
+        "rev": "8f512b526a52e245e770be257235f7d37059ca39",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eemeli",
+        "ref": "v2.7.0",
+        "repo": "yaml",
         "type": "github"
       }
     }
