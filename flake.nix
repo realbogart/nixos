@@ -14,10 +14,12 @@
     };
     nix-ld.url = "github:Mic92/nix-ld";
     nix-yaml.url = "github:realbogart/nix-yaml";
+    nix-azure-pipelines-language-server.url =
+      "github:realbogart/nix-azure-pipelines-language-server";
   };
 
-  outputs =
-    { self, nixpkgs, home-manager, NixOS-WSL, nix-ld, nix-yaml, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, NixOS-WSL, nix-ld
+    , nix-azure-pipelines-language-server, nix-yaml, ... }@inputs:
     let
       system = "x86_64-linux";
       # pkgs = nixpkgs.legacyPackages.${system};
@@ -25,8 +27,9 @@
       johan-home = { configName ? "default" }: {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.users.johan =
-          import ./home.nix { inherit configName nix-yaml; };
+        home-manager.users.johan = import ./home.nix {
+          inherit configName nix-yaml nix-azure-pipelines-language-server;
+        };
       };
     in {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {

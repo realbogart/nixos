@@ -1,4 +1,4 @@
-{ configName, nix-yaml }:
+{ configName, nix-yaml, nix-azure-pipelines-language-server }:
 { config, pkgs, ... }: {
   home.username = "johan";
   home.homeDirectory = "/home/johan";
@@ -49,6 +49,7 @@
     grpcurl
     wireguard-tools
     nix-yaml.packages.${pkgs.system}.yaml
+    nix-azure-pipelines-language-server.packages.${pkgs.system}.azure-pipelines-language-server
     # virtualbox
 
     # (pkgs.nerd-fonts.override { fonts = [ "FiraMono" ]; })
