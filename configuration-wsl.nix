@@ -6,10 +6,8 @@
   wsl = {
     enable = true;
     defaultUser = "johan";
-    useWindowsDriver = false;
+    useWindowsDriver = true;
     wslConf.interop.appendWindowsPath = false;
-    wslConf.automount.enabled = false;
-    wslConf.interop.enabled = false;
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -18,14 +16,10 @@
   nixpkgs.config.allowUnfree = true;
 
   users.users.johan.extraGroups = [ "docker" ];
-  users.users.johan.linger = true;
-  users.users.johan.isNormalUser = true;
   virtualisation.docker.enable = true;
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
   programs.zsh.enable = true;
-
-  systemd.tmpfiles.rules = [ "d /mnt/wslg/runtime-dir 0700 johan johan - -" ];
 
   services.jack = {
     jackd.enable = true;
