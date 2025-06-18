@@ -201,6 +201,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-realbogart_2": {
+      "locked": {
+        "lastModified": 1749191665,
+        "narHash": "sha256-k2tytdLbvH7Be+Uystr1GKeSTT4E42EkT/vRt2ivnXY=",
+        "owner": "realbogart",
+        "repo": "nixpkgs",
+        "rev": "2ed40f18829c2a6cd9ddae3a819b84a6fd3c2508",
+        "type": "github"
+      },
+      "original": {
+        "owner": "realbogart",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1727634051,
@@ -256,7 +271,8 @@
         "nix-azure-pipelines-language-server": "nix-azure-pipelines-language-server",
         "nix-ld": "nix-ld",
         "nix-yaml": "nix-yaml",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_4",
+        "nixpkgs-realbogart": "nixpkgs-realbogart_2"
       }
     },
     "systems": {

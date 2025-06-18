@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-realbogart.url = "github:realbogart/nixpkgs";
     # nixpkgs.url = "github:realbogart/nixpkgs/24.05-johan";
     NixOS-WSL = {
       url = "github:nix-community/NixOS-WSL";
@@ -19,16 +20,22 @@
   };
 
   outputs = { self, nixpkgs, home-manager, NixOS-WSL, nix-ld
-    , nix-azure-pipelines-language-server, nix-yaml, ... }@inputs:
+    , nix-azure-pipelines-language-server, nix-yaml, nixpkgs-realbogart, ...
+    }@inputs:
     let
       system = "x86_64-linux";
       # pkgs = nixpkgs.legacyPackages.${system};
+      pkgs-realbogart = import nixpkgs-realbogart {
+        inherit system;
+        config.allowUnfree = true;
+      };
       pkgs = import nixpkgs { inherit system; };
       johan-home = { configName ? "default" }: {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.users.johan = import ./home.nix {
-          inherit configName nix-yaml nix-azure-pipelines-language-server;
+          inherit configName nix-yaml nix-azure-pipelines-language-server
+            pkgs-realbogart;
         };
       };
     in {

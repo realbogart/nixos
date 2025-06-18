@@ -1,4 +1,4 @@
-{ configName, nix-yaml, nix-azure-pipelines-language-server }:
+{ configName, nix-yaml, nix-azure-pipelines-language-server, pkgs-realbogart }:
 { config, pkgs, ... }: {
   home.username = "johan";
   home.homeDirectory = "/home/johan";
@@ -48,6 +48,7 @@
     containerd
     grpcurl
     wireguard-tools
+    pkgs-realbogart.claude-code
     nix-yaml.packages.${pkgs.system}.yaml
     nix-azure-pipelines-language-server.packages.${pkgs.system}.azure-pipelines-language-server
     # virtualbox
