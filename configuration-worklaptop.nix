@@ -6,6 +6,9 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   virtualisation.docker.enable = true;
+  virtualisation.docker.daemon.settings = {
+    insecure-registries = [ "10.0.1.12:30500" ];
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

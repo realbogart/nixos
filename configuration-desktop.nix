@@ -6,6 +6,9 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   virtualisation.docker.enable = true;
+  virtualisation.docker.daemon.settings = {
+    insecure-registries = [ "10.0.1.12:30500" ];
+  };
   virtualisation.virtualbox.host.enable = true;
   virtualisation.libvirtd.enable = true;
 
@@ -179,6 +182,12 @@
   environment.shells = [ pkgs.zsh ];
   programs.zsh.enable = true;
 
+  # fileSystems."/mnt/eva-laptop" = {
+  #   device = "192.168.10.243:/stuff";
+  #   fsType = "nfs";
+  #   options = [ "rw" "vers=3" ];
+  # };
+
   fileSystems."/mnt/vault/backup" = {
     device = "vault.local:/volume1/backup";
     fsType = "nfs";
@@ -297,10 +306,10 @@
   # };
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedTCPPorts = [ 1234 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
