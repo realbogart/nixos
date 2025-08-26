@@ -16,6 +16,7 @@
   nixpkgs.config.allowUnfree = true;
 
   users.users.johan.extraGroups = [ "docker" ];
+  users.users.johan.linger = true;
   virtualisation.docker.enable = true;
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
