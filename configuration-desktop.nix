@@ -61,13 +61,14 @@
   ];
 
   # Graphics setup
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  hardware.nvidia-container-toolkit.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
@@ -103,7 +104,6 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -269,8 +269,10 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
-    permitRootLogin = "no";
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
   };
 
   # security.wrappers.ubridge = {

@@ -24,12 +24,14 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      # pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs { 
+        inherit system; 
+        config.allowUnfree = true;
+      };
       pkgs-realbogart = import nixpkgs-realbogart {
         inherit system;
         config.allowUnfree = true;
       };
-      pkgs = import nixpkgs { inherit system; };
       johan-home = { configName ? "default" }: {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;

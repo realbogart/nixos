@@ -37,11 +37,11 @@
     docker
     signal-desktop
     helvum
-    carla
     yaml-language-server
     wget
     pinta
     gimp
+    gemini-cli
     unrar
     nix-prefetch-scripts
     runc
@@ -98,7 +98,7 @@
     # }
       ];
 
-    initExtra = ''
+    initContent = ''
       export EDITOR=nvim
       export ZVM_VI_INSERT_ESCAPE_BINDKEY="kj"
       source ${pkgs.fzf}/share/fzf/key-bindings.zsh
