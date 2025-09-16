@@ -48,6 +48,7 @@
     containerd
     grpcurl
     wireguard-tools
+    codex
     pkgs-realbogart.claude-code
     nix-yaml.packages.${pkgs.system}.yaml
     nix-azure-pipelines-language-server.packages.${pkgs.system}.azure-pipelines-language-server
