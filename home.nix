@@ -48,6 +48,7 @@
     containerd
     grpcurl
     wireguard-tools
+    gh
     pkgs-realbogart.codex
     pkgs-realbogart.claude-code
     nix-yaml.packages.${pkgs.system}.yaml

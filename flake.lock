@@ -184,11 +184,11 @@
     },
     "nixpkgs-realbogart_2": {
       "locked": {
-        "lastModified": 1768134485,
-        "narHash": "sha256-glHw0sJ99MwRxKo4r5NI5OOXNfbkCiS6IDpGy1dN12Y=",
+        "lastModified": 1771275207,
+        "narHash": "sha256-+7fSPuMJ2WN0FOYAdVGpclIUUxR/rmaUmxCyu/92xSU=",
         "owner": "realbogart",
         "repo": "nixpkgs",
-        "rev": "c54a8fa7c15c6cebd67cafac125554ff4b73fe22",
+        "rev": "5de2761c0909233890bd6ee328d13e4c01264744",
         "type": "github"
       },
       "original": {
@@ -231,11 +231,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1757745802,
-        "narHash": "sha256-hLEO2TPj55KcUFUU1vgtHE9UEIOjRcH/4QbmfHNF820=",
+        "lastModified": 1769018530,
+        "narHash": "sha256-MJ27Cy2NtBEV5tsK+YraYr2g851f3Fl1LpNHDzDX15c=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c23193b943c6c689d70ee98ce3128239ed9e32d1",
+        "rev": "88d3861acdd3d2f0e361767018218e51810df8a1",
         "type": "github"
       },
       "original": {
