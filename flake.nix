@@ -45,6 +45,7 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
+          ./modules/base.nix
           ./configuration-wsl.nix
           NixOS-WSL.nixosModules.wsl
           home-manager.nixosModules.home-manager
@@ -64,6 +65,7 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
+          ./modules/base.nix
           ./configuration-desktop.nix
           home-manager.nixosModules.home-manager
           (johan-home { configName = "desktop"; })
@@ -79,6 +81,7 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
+          ./modules/base.nix
           ./configuration-worklaptop.nix
           home-manager.nixosModules.home-manager
           (johan-home { configName = "worklaptop"; })
