@@ -19,13 +19,10 @@
     "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
 
     # My binary cache
-    "ams3.digitaloceanspaces.com:EwCAHHfy9VQ3OY7bOtlG9O/TNdAz79EBu7HSJdDcYXc="
+    "nix-cache-1:5Fn/+OJmth/6OjD6S59pptotG6pFp8fM/LOCzrr+sGg="
   ];
-  nix.settings.extra-substituters = [
-    "https://cache.iog.io"
-    # "s3://nix-cache-new?endpoint=ams3.digitaloceanspaces.com"
-    "https://nix-cache-new.ams3.digitaloceanspaces.com/"
-  ];
+  nix.settings.extra-substituters =
+    [ "https://cache.iog.io" "https://nix-cache.ams3.digitaloceanspaces.com" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
