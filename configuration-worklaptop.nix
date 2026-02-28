@@ -3,7 +3,9 @@
 {
   imports = [ ./hardware-configuration-worklaptop.nix modules/syncthing.nix ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+  };
 
   virtualisation.docker.enable = true;
   virtualisation.docker.daemon.settings = {

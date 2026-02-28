@@ -3,7 +3,8 @@
 {
   imports = [ ./hardware-configuration-desktop.nix modules/syncthing.nix ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
 
   virtualisation.docker.enable = true;
   virtualisation.docker.daemon.settings = {
@@ -14,15 +15,16 @@
 
   users.extraGroups.vboxusers.members = [ "johan" ];
 
-  nix.settings.extra-trusted-public-keys = [
+    extra-trusted-public-keys = [
     # Binary Cache for Haskell.nix
     "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
 
     # My binary cache
     "nix-cache-1:5Fn/+OJmth/6OjD6S59pptotG6pFp8fM/LOCzrr+sGg="
   ];
-  nix.settings.extra-substituters =
-    [ "https://cache.iog.io" "https://nix-cache.ams3.digitaloceanspaces.com" ];
+    extra-substituters =
+      [ "https://cache.iog.io" "https://nix-cache.ams3.digitaloceanspaces.com" ];
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
