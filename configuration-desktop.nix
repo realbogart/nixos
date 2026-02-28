@@ -5,16 +5,6 @@
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-
-  virtualisation.docker.enable = true;
-  virtualisation.docker.daemon.settings = {
-    insecure-registries = [ "10.0.1.12:30500" ];
-  };
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.libvirtd.enable = true;
-
-  users.extraGroups.vboxusers.members = [ "johan" ];
-
     extra-trusted-public-keys = [
     # Binary Cache for Haskell.nix
     "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
@@ -25,6 +15,15 @@
     extra-substituters =
       [ "https://cache.iog.io" "https://nix-cache.ams3.digitaloceanspaces.com" ];
   };
+
+  virtualisation.docker.enable = true;
+  virtualisation.docker.daemon.settings = {
+    insecure-registries = [ "10.0.1.12:30500" ];
+  };
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.libvirtd.enable = true;
+
+  users.extraGroups.vboxusers.members = [ "johan" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
