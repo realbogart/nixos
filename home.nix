@@ -51,6 +51,7 @@
     gh
     pkgs-realbogart.codex
     pkgs-realbogart.claude-code
+    pkgs-realbogart.copilot-cli
     nix-yaml.packages.${pkgs.system}.yaml
     nix-azure-pipelines-language-server.packages.${pkgs.system}.azure-pipelines-language-server
     # virtualbox
