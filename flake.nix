@@ -15,32 +15,49 @@
     };
     nix-ld.url = "github:Mic92/nix-ld";
     nix-yaml.url = "github:realbogart/nix-yaml";
-    nix-azure-pipelines-language-server.url =
-      "github:realbogart/nix-azure-pipelines-language-server";
+    nix-azure-pipelines-language-server.url = "github:realbogart/nix-azure-pipelines-language-server";
   };
 
-  outputs = { self, nixpkgs, home-manager, NixOS-WSL, nix-ld
-    , nix-azure-pipelines-language-server, nix-yaml, nixpkgs-realbogart, ...
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      NixOS-WSL,
+      nix-ld,
+      nix-azure-pipelines-language-server,
+      nix-yaml,
+      nixpkgs-realbogart,
+      ...
     }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs { 
-        inherit system; 
+      pkgs = import nixpkgs {
+        inherit system;
         config.allowUnfree = true;
       };
       pkgs-realbogart = import nixpkgs-realbogart {
         inherit system;
         config.allowUnfree = true;
       };
-      johan-home = { configName ? "default" }: {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.users.johan = import ./home.nix {
-          inherit configName nix-yaml nix-azure-pipelines-language-server
-            pkgs-realbogart;
+      johan-home =
+        {
+          configName ? "default",
+        }:
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.johan = import ./home.nix {
+            inherit
+              configName
+              nix-yaml
+              nix-azure-pipelines-language-server
+              pkgs-realbogart
+              ;
+          };
         };
-      };
-    in {
+    in
+    {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
@@ -73,7 +90,10 @@
           {
             # programs.nix-ld.enable = true;
             programs.nix-ld.dev.enable = true;
-            programs.nix-ld.dev.libraries = with pkgs; [ stdenv.cc.cc libz ];
+            programs.nix-ld.dev.libraries = with pkgs; [
+              stdenv.cc.cc
+              libz
+            ];
           }
         ];
       };

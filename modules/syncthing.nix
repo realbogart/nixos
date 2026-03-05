@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   services = {
     syncthing = {
       enable = true;
@@ -10,8 +11,7 @@
       settings = {
         devices = {
           "kubernetes" = {
-            id =
-              "C4B74PA-4D4IQLC-ZNWGDAS-RHFXUZJ-E7QAU3N-TUVYGP4-K62ENZA-ARU2NQZ";
+            id = "C4B74PA-4D4IQLC-ZNWGDAS-RHFXUZJ-E7QAU3N-TUVYGP4-K62ENZA-ARU2NQZ";
           };
         };
       };

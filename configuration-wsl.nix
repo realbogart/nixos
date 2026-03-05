@@ -10,7 +10,10 @@
     wslConf.interop.appendWindowsPath = false;
   };
 
-  users.users.johan.extraGroups = [ "docker" "jackaudio" ];
+  users.users.johan.extraGroups = [
+    "docker"
+    "jackaudio"
+  ];
   users.users.johan.linger = true;
 
   services.jack = {
