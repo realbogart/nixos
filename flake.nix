@@ -77,20 +77,5 @@
           }
         ];
       };
-      nixosConfigurations.worklaptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./modules/base.nix
-          ./configuration-worklaptop.nix
-          home-manager.nixosModules.home-manager
-          (johan-home { configName = "worklaptop"; })
-          nix-ld.nixosModules.nix-ld
-          {
-            programs.nix-ld.enable = true;
-            programs.nix-ld.libraries = with pkgs; [ stdenv.cc.cc libz ];
-          }
-        ];
-      };
     };
 }
