@@ -4,19 +4,19 @@
   imports = [ ./hardware-configuration-desktop.nix modules/syncthing.nix ];
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
     extra-trusted-public-keys = [
-    # Binary Cache for Haskell.nix
-    "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+      # Binary Cache for Haskell.nix
+      "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
 
-    # My binary cache
-    "nix-cache-1:5Fn/+OJmth/6OjD6S59pptotG6pFp8fM/LOCzrr+sGg="
-  ];
-    extra-substituters =
-      [ "https://cache.iog.io" "https://nix-cache.ams3.digitaloceanspaces.com" ];
+      # My binary cache
+      "nix-cache-1:5Fn/+OJmth/6OjD6S59pptotG6pFp8fM/LOCzrr+sGg="
+    ];
+    extra-substituters = [
+      "https://cache.iog.io"
+      "https://nix-cache.ams3.digitaloceanspaces.com"
+    ];
   };
 
-  virtualisation.docker.enable = true;
   virtualisation.docker.daemon.settings = {
     insecure-registries = [ "10.0.1.12:30500" ];
   };
@@ -154,9 +154,6 @@
     ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -178,10 +175,6 @@
     # vagrant
     steam
   ];
-
-  users.defaultUserShell = pkgs.zsh;
-  environment.shells = [ pkgs.zsh ];
-  programs.zsh.enable = true;
 
   # fileSystems."/mnt/eva-laptop" = {
   #   device = "192.168.10.243:/stuff";

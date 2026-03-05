@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ ... }:
 
 {
   imports = [ ];
@@ -10,19 +10,8 @@
     wslConf.interop.appendWindowsPath = false;
   };
 
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  users.users.johan.extraGroups = [ "docker" ];
+  users.users.johan.extraGroups = [ "docker" "jackaudio" ];
   users.users.johan.linger = true;
-  virtualisation.docker.enable = true;
-  users.defaultUserShell = pkgs.zsh;
-  environment.shells = [ pkgs.zsh ];
-  programs.zsh.enable = true;
 
   services.jack = {
     jackd.enable = true;
@@ -37,8 +26,6 @@
       #'';
     };
   };
-
-  users.extraUsers.johan.extraGroups = [ "jackaudio" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
