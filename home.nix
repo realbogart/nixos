@@ -20,7 +20,7 @@
     vlc
     xsel
     syncthing
-    nixfmt-classic
+    nixfmt
     stylua
     s3cmd
     gnupg
@@ -33,7 +33,6 @@
     lshw
     tree
     magic-wormhole
-    btop
     docker
     signal-desktop
     helvum
@@ -52,8 +51,8 @@
     pkgs-realbogart.codex
     pkgs-realbogart.claude-code
     pkgs-realbogart.github-copilot-cli
-    nix-yaml.packages.${pkgs.system}.yaml
-    nix-azure-pipelines-language-server.packages.${pkgs.system}.azure-pipelines-language-server
+    nix-yaml.packages.${pkgs.stdenv.hostPlatform.system}.yaml
+    nix-azure-pipelines-language-server.packages.${pkgs.stdenv.hostPlatform.system}.azure-pipelines-language-server
     # virtualbox
 
     # (pkgs.nerd-fonts.override { fonts = [ "FiraMono" ]; })
@@ -150,4 +149,3 @@
 
   programs.home-manager.enable = true;
 }
-
