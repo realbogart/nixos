@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration-desktop.nix modules/syncthing.nix ];
+  imports = [
+    ./hardware-configuration-desktop.nix
+    modules/syncthing.nix
+  ];
 
   nix.settings = {
     extra-trusted-public-keys = [
@@ -36,20 +39,6 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # networking.wg-quick.interfaces = {
-  #   wg0 = {
-  #     address = [ "10.0.0.2/32" ];
-  #     # dns = [ "192.168.10.1" ];
-  #     privateKeyFile = "/home/johan/wg-keys/nixos-private";
-  #     peers = [{
-  #       publicKey = "7qNt20uNcwAWR8fj1Xp0+E6VlyopUtmBUFs4KSH9HBE=";
-  #       allowedIPs = [ "10.0.0.1/32" ];
-  #
-  #       endpoint = "93.177.80.114:51820";
-  #       persistentKeepalive = 25;
-  #     }];
-  #   };
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
@@ -176,40 +165,49 @@
     steam
   ];
 
-  # fileSystems."/mnt/eva-laptop" = {
-  #   device = "192.168.10.243:/stuff";
-  #   fsType = "nfs";
-  #   options = [ "rw" "vers=3" ];
-  # };
-
   fileSystems."/mnt/vault/backup" = {
     device = "vault.local:/volume1/backup";
     fsType = "nfs";
-    options = [ "rw" "vers=3" ];
+    options = [
+      "rw"
+      "vers=3"
+    ];
   };
 
   fileSystems."/mnt/vault/media" = {
     device = "vault.local:/volume1/media";
     fsType = "nfs";
-    options = [ "rw" "vers=3" ];
+    options = [
+      "rw"
+      "vers=3"
+    ];
   };
 
   fileSystems."/mnt/vault/music_backup" = {
     device = "vault.local:/volume1/music_backup";
     fsType = "nfs";
-    options = [ "rw" "vers=3" ];
+    options = [
+      "rw"
+      "vers=3"
+    ];
   };
 
   fileSystems."/mnt/vault/PlexMediaServer" = {
     device = "vault.local:/volume1/PlexMediaServer";
     fsType = "nfs";
-    options = [ "rw" "vers=3" ];
+    options = [
+      "rw"
+      "vers=3"
+    ];
   };
 
   fileSystems."/mnt/vault/temp" = {
     device = "vault.local:/volume1/temp";
     fsType = "nfs";
-    options = [ "rw" "vers=3" ];
+    options = [
+      "rw"
+      "vers=3"
+    ];
   };
 
   systemd.tmpfiles.rules = [

@@ -1,5 +1,11 @@
-{ configName, nix-yaml, nix-azure-pipelines-language-server, pkgs-realbogart }:
-{ config, pkgs, ... }: {
+{
+  configName,
+  nix-yaml,
+  nix-azure-pipelines-language-server,
+  pkgs-realbogart,
+}:
+{ config, pkgs, ... }:
+{
   home.username = "johan";
   home.homeDirectory = "/home/johan";
 
@@ -53,9 +59,6 @@
     pkgs-realbogart.github-copilot-cli
     nix-yaml.packages.${pkgs.stdenv.hostPlatform.system}.yaml
     nix-azure-pipelines-language-server.packages.${pkgs.stdenv.hostPlatform.system}.azure-pipelines-language-server
-    # virtualbox
-
-    # (pkgs.nerd-fonts.override { fonts = [ "FiraMono" ]; })
   ];
 
   fonts.fontconfig.enable = true;
@@ -80,25 +83,17 @@
       theme = "robbyrussell";
     };
 
-    plugins = [{
-      name = "zsh-autosuggestions";
-      src = pkgs.fetchFromGitHub {
-        owner = "zsh-users";
-        repo = "zsh-autosuggestions";
-        rev = "v0.7.0";
-        sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
-      };
-    }
-    # {
-    #   name = "zsh-vi-mode";
-    #   src = pkgs.fetchFromGitHub {
-    #     owner = "jeffreytse";
-    #     repo = "zsh-vi-mode";
-    #     rev = "v0.11.0";
-    #     sha256 = "sha256-xbchXJTFWeABTwq6h4KWLh+EvydDrDzcY9AQVK65RS8=";
-    #   };
-    # }
-      ];
+    plugins = [
+      {
+        name = "zsh-autosuggestions";
+        src = pkgs.fetchFromGitHub {
+          owner = "zsh-users";
+          repo = "zsh-autosuggestions";
+          rev = "v0.7.0";
+          sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
+        };
+      }
+    ];
 
     initContent = ''
       export EDITOR=nvim
@@ -125,16 +120,16 @@
       rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
     };
 
-    ".vimrc".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dotfiles/nvim/vimrc.vim";
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dotfiles/nvim";
-    ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dotfiles/tmux";
-    ".config/git".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dotfiles/git";
-    ".config/alacritty".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dotfiles/alacritty";
+    ".vimrc".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim/vimrc.vim";
+    ".config/nvim".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
+    ".config/tmux".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/tmux";
+    ".config/git".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/git";
+    ".config/alacritty".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/alacritty";
   };
 
   # This value determines the home Manager release that your
