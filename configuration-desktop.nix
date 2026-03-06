@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -26,12 +26,19 @@
   virtualisation.virtualbox.host.enable = true;
   virtualisation.libvirtd.enable = true;
 
+  # Upstream unit currently hardcodes /usr/bin/sh, which does not exist on NixOS.
+  systemd.services."virt-secret-init-encryption".serviceConfig.ExecStart = lib.mkForce [
+    ""
+    "${pkgs.runtimeShell} -c 'umask 0077 && (${pkgs.coreutils}/bin/dd if=/dev/random status=none bs=32 count=1 | ${pkgs.systemd}/bin/systemd-creds encrypt --name=secrets-encryption-key - /var/lib/libvirt/secrets/secrets-encryption-key)'"
+  ];
+
   users.extraGroups.vboxusers.members = [ "johan" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 2;
+  # 95 MB ESP is very small; keep only one generation to avoid boot entry copy failures.
+  boot.loader.systemd-boot.configurationLimit = 1;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -155,7 +162,7 @@
     # nvidia-offload
 
     # Desktop apps
-    wineWowPackages.stable
+    wineWow64Packages.stable
     steam
   ];
 
