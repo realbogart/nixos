@@ -10,7 +10,6 @@
   home.homeDirectory = "/home/johan";
 
   home.packages = with pkgs; [
-    neovim
     git
     git-lfs
     zip
@@ -54,6 +53,12 @@
     grpcurl
     wireguard-tools
     gh
+    brave
+    neovim
+    firefox
+    discord
+    flameshot
+    spotify
     pkgs-realbogart.codex
     pkgs-realbogart.claude-code
     pkgs-realbogart.github-copilot-cli

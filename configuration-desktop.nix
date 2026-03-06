@@ -155,13 +155,7 @@
     # nvidia-offload
 
     # Desktop apps
-    brave
-    firefox
-    discord
-    flameshot
-    spotify
     wineWowPackages.stable
-    # vagrant
     steam
   ];
 

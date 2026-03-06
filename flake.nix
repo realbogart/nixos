@@ -69,7 +69,8 @@
           (johan-home { })
           nix-ld.nixosModules.nix-ld
           {
-            programs.nix-ld.dev.enable = true;
+            programs.nix-ld.enable = true;
+            programs.nix-ld.dev.enable = false;
             programs.nix-ld.libraries = with pkgs; [
               stdenv.cc.cc
               libz
@@ -88,9 +89,9 @@
           (johan-home { configName = "desktop"; })
           nix-ld.nixosModules.nix-ld
           {
-            # programs.nix-ld.enable = true;
-            programs.nix-ld.dev.enable = true;
-            programs.nix-ld.dev.libraries = with pkgs; [
+            programs.nix-ld.enable = true;
+            programs.nix-ld.dev.enable = false;
+            programs.nix-ld.libraries = with pkgs; [
               stdenv.cc.cc
               libz
             ];
