@@ -25,6 +25,7 @@
     nil
     vlc
     xsel
+    xbanish
     nixfmt
     stylua
     s3cmd
