@@ -271,8 +271,6 @@
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="3297", MODE:="0666", SYMLINK+="ignition_dfu"
   '';
 
-  # services.nfs.client.enable = true;
-
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = false;
@@ -314,11 +312,9 @@
   #     [ "/dev/kvm" ];
   # };
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ 1234 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
