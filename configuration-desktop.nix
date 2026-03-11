@@ -55,6 +55,10 @@
     nerd-fonts._0xproto
   ];
 
+  fonts.fontconfig.defaultFonts = {
+    monospace = [ "FiraMono Nerd Font Mono" ];
+  };
+
   # Graphics setup
   hardware.graphics = {
     enable = true;
