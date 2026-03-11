@@ -3,7 +3,6 @@
 {
   imports = [
     ./hardware-configuration-desktop.nix
-    modules/syncthing.nix
   ];
 
   nix.settings = {

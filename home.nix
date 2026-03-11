@@ -25,7 +25,6 @@
     nil
     vlc
     xsel
-    syncthing
     nixfmt
     stylua
     s3cmd
