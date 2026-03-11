@@ -158,6 +158,7 @@
   environment.systemPackages = with pkgs; [
     alacritty
     taffybar
+    xmobar
     xterm
     wget
     qjackctl
