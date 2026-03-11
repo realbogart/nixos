@@ -102,6 +102,7 @@
   services.xserver.displayManager.startx.enable = true;
   services.displayManager.defaultSession = "none+xmonad";
   services.xserver.windowManager.xmonad.enable = true;
+  services.getty.autologinUser = "johan";
 
   # Configure keymap in X11
   services.xserver = {
@@ -155,6 +156,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     alacritty
+    taffybar
     xterm
     wget
     qjackctl
