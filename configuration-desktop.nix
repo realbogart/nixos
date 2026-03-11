@@ -97,10 +97,11 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  # services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # Minimal X11 session from TTY: login on console and run `startx`.
+  services.displayManager.sddm.enable = false;
+  services.xserver.displayManager.startx.enable = true;
+  services.displayManager.defaultSession = "none+xmonad";
+  services.xserver.windowManager.xmonad.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -154,6 +155,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     alacritty
+    xterm
     wget
     qjackctl
     lm_sensors
