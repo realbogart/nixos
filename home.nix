@@ -21,6 +21,7 @@
     element-desktop
     gnumake
     tmux
+    rofi
     nil
     vlc
     xsel
@@ -106,9 +107,12 @@
       source ${pkgs.fzf}/share/fzf/key-bindings.zsh
       zstyle ':bracketed-paste-magic' active-widgets '.self-*'
       bindkey '\C-e' edit-command-line
+      bindkey '^H' backward-delete-char
+      bindkey '^?' backward-delete-char
       echo '\e[5 q'
 
-      if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+      # startx needs a real Linux VT; skip auto-tmux on /dev/ttyN consoles.
+      if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ ! "$TTY" =~ ^/dev/tty[0-9]+$ ]]; then
         exec tmux
       fi
     '';
@@ -135,6 +139,11 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/git";
     ".config/alacritty".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/alacritty";
+    ".xmonad/xmonad.hs".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/xmonad.hs";
+    ".xinitrc".text = ''
+      exec /run/current-system/sw/bin/dbus-run-session /run/current-system/sw/bin/xmonad
+    '';
   };
 
   # This value determines the home Manager release that your
