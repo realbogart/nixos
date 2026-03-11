@@ -102,6 +102,7 @@
   services.xserver.displayManager.startx.enable = true;
   services.displayManager.defaultSession = "none+xmonad";
   services.xserver.windowManager.xmonad.enable = true;
+  services.xserver.windowManager.xmonad.enableContribAndExtras = true;
   services.getty.autologinUser = "johan";
 
   # Configure keymap in X11
