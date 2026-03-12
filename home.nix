@@ -57,7 +57,6 @@
     brave
     neovim
     firefox
-    discord
     flameshot
     spotify
     pkgs-realbogart.codex
@@ -129,6 +128,18 @@
     };
   };
 
+  xdg.desktopEntries.flatpak-manager = {
+    name = "Flatpak Manager";
+    genericName = "Flatpak";
+    comment = "Install and update Flatpak applications";
+    exec = "flatpak-rofi";
+    terminal = false;
+    categories = [
+      "System"
+      "Utility"
+    ];
+  };
+
   home.file = {
     ".tmux/plugins/tpm".source = builtins.fetchGit {
       url = "https://github.com/tmux-plugins/tpm.git";
@@ -145,9 +156,18 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/git";
     ".config/alacritty".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/alacritty";
+    ".config/rofi".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/rofi";
+    ".config/xmonad/launcher-apps.tsv".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/launcher-apps.tsv";
     ".xmonad/xmonad.hs".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/xmonad.hs";
+    ".local/bin/flatpak-rofi".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/flatpak-rofi";
+    ".local/bin/rofi-launcher".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/rofi-launcher";
     ".xinitrc".text = ''
+      export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:''${XDG_DATA_DIRS:-/run/current-system/sw/share:$HOME/.nix-profile/share:/usr/local/share:/usr/share}"
       exec /run/current-system/sw/bin/dbus-run-session /run/current-system/sw/bin/xmonad
     '';
   };
