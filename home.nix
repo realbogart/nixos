@@ -21,6 +21,7 @@
     gnumake
     tmux
     rofi
+    xdotool
     nil
     vlc
     xsel
