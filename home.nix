@@ -28,6 +28,7 @@
     xbanish
     dunst
     libnotify
+    lxqt.lxqt-policykit
     xss-lock
     nixfmt
     stylua
@@ -159,6 +160,7 @@
         ${pkgs.xorg.xset}/bin/xset s 600 5
         ${pkgs.xorg.xset}/bin/xset +dpms
         ${pkgs.xss-lock}/bin/xss-lock --transfer-sleep-lock -- /run/wrappers/bin/slock &
+        ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent &
         ${pkgs.dunst}/bin/dunst &
         exec /run/current-system/sw/bin/xmonad
       '

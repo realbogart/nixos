@@ -146,6 +146,7 @@
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
   programs.slock.enable = true;
+  security.polkit.enable = true;
   services.getty.autologinUser = "johan";
 
   # Configure keymap in X11
