@@ -26,6 +26,8 @@
     vlc
     xsel
     xbanish
+    dunst
+    libnotify
     nixfmt
     stylua
     s3cmd
@@ -142,6 +144,8 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/alacritty";
     ".config/rofi".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/rofi";
+    ".config/dunst/dunstrc".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/dunst/dunstrc";
     ".config/xmonad/launcher-apps.tsv".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/launcher-apps.tsv";
     ".xmonad/xmonad.hs".source =
@@ -150,7 +154,7 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/rofi-launcher";
     ".xinitrc".text = ''
       export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:''${XDG_DATA_DIRS:-/run/current-system/sw/share:$HOME/.nix-profile/share:/usr/local/share:/usr/share}"
-      exec /run/current-system/sw/bin/dbus-run-session /run/current-system/sw/bin/xmonad
+      exec /run/current-system/sw/bin/dbus-run-session ${pkgs.runtimeShell} -lc '${pkgs.dunst}/bin/dunst & exec /run/current-system/sw/bin/xmonad'
     '';
   };
 
