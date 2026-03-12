@@ -128,18 +128,6 @@
     };
   };
 
-  xdg.desktopEntries.flatpak-manager = {
-    name = "Flatpak Manager";
-    genericName = "Flatpak";
-    comment = "Install and update Flatpak applications";
-    exec = "flatpak-rofi";
-    terminal = false;
-    categories = [
-      "System"
-      "Utility"
-    ];
-  };
-
   home.file = {
     ".tmux/plugins/tpm".source = builtins.fetchGit {
       url = "https://github.com/tmux-plugins/tpm.git";
@@ -162,8 +150,6 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/launcher-apps.tsv";
     ".xmonad/xmonad.hs".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/xmonad.hs";
-    ".local/bin/flatpak-rofi".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/flatpak-rofi";
     ".local/bin/rofi-launcher".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/rofi-launcher";
     ".xinitrc".text = ''
