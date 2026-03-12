@@ -28,6 +28,7 @@
     xbanish
     dunst
     libnotify
+    xss-lock
     nixfmt
     stylua
     s3cmd
@@ -154,7 +155,13 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/rofi-launcher";
     ".xinitrc".text = ''
       export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:''${XDG_DATA_DIRS:-/run/current-system/sw/share:$HOME/.nix-profile/share:/usr/local/share:/usr/share}"
-      exec /run/current-system/sw/bin/dbus-run-session ${pkgs.runtimeShell} -lc '${pkgs.dunst}/bin/dunst & exec /run/current-system/sw/bin/xmonad'
+      exec /run/current-system/sw/bin/dbus-run-session ${pkgs.runtimeShell} -lc '
+        ${pkgs.xorg.xset}/bin/xset s 600 5
+        ${pkgs.xorg.xset}/bin/xset +dpms
+        ${pkgs.xss-lock}/bin/xss-lock --transfer-sleep-lock -- /run/wrappers/bin/slock &
+        ${pkgs.dunst}/bin/dunst &
+        exec /run/current-system/sw/bin/xmonad
+      '
     '';
   };
 
