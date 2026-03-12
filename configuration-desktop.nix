@@ -105,6 +105,19 @@
     };
   };
 
+  systemd.services.flatpak-install-apps = {
+    description = "Install selected desktop apps from Flathub";
+    after = [ "flatpak-add-flathub.service" ];
+    wants = [ "flatpak-add-flathub.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = [
+        "${pkgs.flatpak}/bin/flatpak install --system --noninteractive --or-update flathub org.mozilla.firefox com.brave.Browser com.spotify.Client com.discordapp.Discord"
+      ];
+    };
+  };
+
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
 

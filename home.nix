@@ -54,11 +54,8 @@
     grpcurl
     wireguard-tools
     gh
-    brave
     neovim
-    firefox
     flameshot
-    spotify
     pkgs-realbogart.codex
     pkgs-realbogart.claude-code
     pkgs-realbogart.github-copilot-cli
