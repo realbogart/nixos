@@ -113,7 +113,7 @@
     serviceConfig = {
       Type = "oneshot";
       ExecStart = [
-        "${pkgs.flatpak}/bin/flatpak install --system --noninteractive --or-update flathub org.mozilla.firefox com.brave.Browser com.spotify.Client com.discordapp.Discord"
+        "${pkgs.flatpak}/bin/flatpak install --system --noninteractive --or-update flathub org.mozilla.firefox com.brave.Browser com.spotify.Client com.discordapp.Discord im.riot.Riot org.signal.Signal"
       ];
     };
   };

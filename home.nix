@@ -18,7 +18,6 @@
     fzf
     btop
     clang
-    element-desktop
     gnumake
     tmux
     rofi
@@ -40,7 +39,6 @@
     tree
     magic-wormhole
     docker
-    signal-desktop
     helvum
     yaml-language-server
     wget
