@@ -151,11 +151,6 @@
     ".xinitrc".text = ''
       export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:''${XDG_DATA_DIRS:-/run/current-system/sw/share:$HOME/.nix-profile/share:/usr/local/share:/usr/share}"
       exec /run/current-system/sw/bin/dbus-run-session ${pkgs.runtimeShell} -lc '
-        ${pkgs.xset}/bin/xset s 600 5
-        ${pkgs.xset}/bin/xset +dpms
-        ${pkgs.xss-lock}/bin/xss-lock --transfer-sleep-lock -- /run/wrappers/bin/slock &
-        ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent &
-        ${pkgs.dunst}/bin/dunst &
         exec /run/current-system/sw/bin/xmonad
       '
     '';

@@ -138,15 +138,11 @@
     LC_TIME = "sv_SE.UTF-8";
   };
 
-  # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-  # Use a normal display manager instead of hosting X directly on tty1.
   services.displayManager.sddm.enable = false;
   services.xserver.displayManager.lightdm.enable = true;
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "johan";
-  services.displayManager.defaultSession = "none+xmonad";
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
   programs.slock.enable = true;
