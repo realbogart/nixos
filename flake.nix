@@ -14,6 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-ld.url = "github:Mic92/nix-ld";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nix-yaml.url = "github:realbogart/nix-yaml";
     nix-azure-pipelines-language-server.url = "github:realbogart/nix-azure-pipelines-language-server";
   };
@@ -25,6 +26,7 @@
       home-manager,
       NixOS-WSL,
       nix-ld,
+      nix-flatpak,
       nix-azure-pipelines-language-server,
       nix-yaml,
       nixpkgs-realbogart,
@@ -86,6 +88,7 @@
           ./modules/base.nix
           ./configuration-desktop.nix
           home-manager.nixosModules.home-manager
+          nix-flatpak.nixosModules.nix-flatpak
           (johan-home { configName = "desktop"; })
           nix-ld.nixosModules.nix-ld
           {

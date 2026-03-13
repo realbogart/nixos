@@ -87,37 +87,22 @@
   networking.networkmanager.unmanaged = [ "type:wifi" ];
 
   services.flatpak.enable = true;
+  services.flatpak.packages = [
+    "org.mozilla.firefox"
+    "com.brave.Browser"
+    "com.spotify.Client"
+    "com.discordapp.Discord"
+    "im.riot.Riot"
+    "org.signal.Signal"
+    "com.rtosta.zapzap"
+  ];
+  services.flatpak.update.onActivation = false;
+  services.flatpak.uninstallUnmanaged = true;
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     config.common.default = "*";
-  };
-
-  systemd.services.flatpak-add-flathub = {
-    description = "Ensure Flathub Flatpak remote is configured";
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = [
-        "${pkgs.flatpak}/bin/flatpak remote-add --system --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
-      ];
-    };
-  };
-
-  systemd.services.flatpak-install-apps = {
-    description = "Install selected desktop apps from Flathub";
-    after = [ "flatpak-add-flathub.service" ];
-    wants = [ "flatpak-add-flathub.service" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = [
-        "${pkgs.flatpak}/bin/flatpak install --system --noninteractive --or-update flathub org.mozilla.firefox com.brave.Browser com.spotify.Client com.discordapp.Discord im.riot.Riot org.signal.Signal com.rtosta.zapzap"
-      ];
-    };
   };
 
   # Set your time zone.
