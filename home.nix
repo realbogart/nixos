@@ -110,13 +110,7 @@
       bindkey '^?' backward-delete-char
       echo '\e[5 q'
 
-      # Auto-start X only on tty1 so boot lands in xmonad.
-      # Keep tty2/tty3/etc. as manual recovery consoles.
-      if [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && [ "''${XDG_VTNR:-}" = "1" ]; then
-        exec startx
-      fi
-
-      # startx needs a real Linux VT; skip auto-tmux on /dev/ttyN consoles.
+      # Skip auto-tmux on Linux virtual consoles.
       if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ ! "$TTY" =~ ^/dev/tty[0-9]+$ ]]; then
         exec tmux
       fi
@@ -157,8 +151,8 @@
     ".xinitrc".text = ''
       export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:''${XDG_DATA_DIRS:-/run/current-system/sw/share:$HOME/.nix-profile/share:/usr/local/share:/usr/share}"
       exec /run/current-system/sw/bin/dbus-run-session ${pkgs.runtimeShell} -lc '
-        ${pkgs.xorg.xset}/bin/xset s 600 5
-        ${pkgs.xorg.xset}/bin/xset +dpms
+        ${pkgs.xset}/bin/xset s 600 5
+        ${pkgs.xset}/bin/xset +dpms
         ${pkgs.xss-lock}/bin/xss-lock --transfer-sleep-lock -- /run/wrappers/bin/slock &
         ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent &
         ${pkgs.dunst}/bin/dunst &

@@ -74,12 +74,10 @@
 
   hardware.nvidia-container-toolkit.enable = true;
   hardware.nvidia = {
-    modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    open = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   # Enable networking
@@ -143,15 +141,16 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Minimal X11 session from TTY: login on console and run `startx`.
+  # Use a normal display manager instead of hosting X directly on tty1.
   services.displayManager.sddm.enable = false;
-  services.xserver.displayManager.startx.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "johan";
   services.displayManager.defaultSession = "none+xmonad";
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
   programs.slock.enable = true;
   security.polkit.enable = true;
-  services.getty.autologinUser = "johan";
 
   # Configure keymap in X11
   services.xserver = {
