@@ -5,6 +5,33 @@
   ...
 }:
 
+let
+  vaultShares = [
+    "backup"
+    "media"
+    "music_backup"
+    "PlexMediaServer"
+    "temp"
+  ];
+
+  vaultMountOptions = [
+    "noauto"
+    "x-systemd.automount"
+    "x-systemd.idle-timeout=10min"
+    "x-systemd.mount-timeout=30s"
+    "rw"
+    "vers=3"
+  ];
+
+  mkVaultMount = share: {
+    name = "/mnt/vault/${share}";
+    value = {
+      device = "vault.local:/volume1/${share}";
+      fsType = "nfs";
+      options = vaultMountOptions;
+    };
+  };
+in
 {
   imports = [
     ./hardware-configuration-desktop.nix
@@ -200,58 +227,12 @@
     steam
   ];
 
-  fileSystems."/mnt/vault/backup" = {
-    device = "vault.local:/volume1/backup";
-    fsType = "nfs";
-    options = [
-      "rw"
-      "vers=3"
-    ];
-  };
-
-  fileSystems."/mnt/vault/media" = {
-    device = "vault.local:/volume1/media";
-    fsType = "nfs";
-    options = [
-      "rw"
-      "vers=3"
-    ];
-  };
-
-  fileSystems."/mnt/vault/music_backup" = {
-    device = "vault.local:/volume1/music_backup";
-    fsType = "nfs";
-    options = [
-      "rw"
-      "vers=3"
-    ];
-  };
-
-  fileSystems."/mnt/vault/PlexMediaServer" = {
-    device = "vault.local:/volume1/PlexMediaServer";
-    fsType = "nfs";
-    options = [
-      "rw"
-      "vers=3"
-    ];
-  };
-
-  fileSystems."/mnt/vault/temp" = {
-    device = "vault.local:/volume1/temp";
-    fsType = "nfs";
-    options = [
-      "rw"
-      "vers=3"
-    ];
-  };
+  fileSystems = builtins.listToAttrs (map mkVaultMount vaultShares);
 
   systemd.tmpfiles.rules = [
     "d /mnt/vault 0775 johan users - -"
-    "d /mnt/vault/backup 0775 johan users - -"
-    "d /mnt/vault/music_backup 0775 johan users - -"
-    "d /mnt/vault/PlexMediaServer 0775 johan users - -"
-    "d /mnt/vault/temp 0775 johan users - -"
-  ];
+  ]
+  ++ map (share: "d /mnt/vault/${share} 0775 johan users - -") vaultShares;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
