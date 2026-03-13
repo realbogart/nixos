@@ -27,16 +27,17 @@
   virtualisation.docker.daemon.settings = {
     insecure-registries = [ "10.0.1.12:30500" ];
   };
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.libvirtd.enable = true;
+  # virtualisation.virtualbox.host.enable = true;
+  # virtualisation.libvirtd.enable = true;
 
+  # Re-enable this with libvirtd if you want to restore libvirt later.
   # Upstream unit currently hardcodes /usr/bin/sh, which does not exist on NixOS.
-  systemd.services."virt-secret-init-encryption".serviceConfig.ExecStart = lib.mkForce [
-    ""
-    "${pkgs.runtimeShell} -c 'umask 0077 && (${pkgs.coreutils}/bin/dd if=/dev/random status=none bs=32 count=1 | ${pkgs.systemd}/bin/systemd-creds encrypt --name=secrets-encryption-key - /var/lib/libvirt/secrets/secrets-encryption-key)'"
-  ];
+  # systemd.services."virt-secret-init-encryption".serviceConfig.ExecStart = lib.mkForce [
+  #   ""
+  #   "${pkgs.runtimeShell} -c 'umask 0077 && (${pkgs.coreutils}/bin/dd if=/dev/random status=none bs=32 count=1 | ${pkgs.systemd}/bin/systemd-creds encrypt --name=secrets-encryption-key - /var/lib/libvirt/secrets/secrets-encryption-key)'"
+  # ];
 
-  users.extraGroups.vboxusers.members = [ "johan" ];
+  # users.extraGroups.vboxusers.members = [ "johan" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -83,6 +84,9 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.modemmanager.enable = false;
+  networking.wireless.enable = lib.mkForce false;
+  networking.networkmanager.unmanaged = [ "type:wifi" ];
 
   services.flatpak.enable = true;
   xdg.portal = {
@@ -187,8 +191,8 @@
       "plugdev"
       "audio"
       "ubridge"
-      "qemu-libvirtd"
-      "libvirtd"
+      # "qemu-libvirtd"
+      # "libvirtd"
     ];
 
     packages = with pkgs; [ ];
