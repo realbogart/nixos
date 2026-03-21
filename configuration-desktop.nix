@@ -172,7 +172,6 @@ in
   # Enable sound with pipewire.
   musnix.enable = true;
   musnix.rtcqs.enable = true;
-  musnix.kernel.realtime = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -185,7 +184,7 @@ in
       pipewire."10-low-latency" = {
         "context.properties" = {
           "default.clock.rate" = 48000;
-          "default.clock.quantum" = 64;
+          "default.clock.quantum" = 128;
           "default.clock.min-quantum" = 64;
           "default.clock.max-quantum" = 256;
         };
