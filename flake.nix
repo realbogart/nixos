@@ -15,6 +15,10 @@
     };
     nix-ld.url = "github:Mic92/nix-ld";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    musnix = {
+      url = "github:musnix/musnix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-yaml.url = "github:realbogart/nix-yaml";
     nix-azure-pipelines-language-server.url = "github:realbogart/nix-azure-pipelines-language-server";
   };
@@ -27,6 +31,7 @@
       NixOS-WSL,
       nix-ld,
       nix-flatpak,
+      musnix,
       nix-azure-pipelines-language-server,
       nix-yaml,
       nixpkgs-realbogart,
@@ -86,6 +91,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./modules/base.nix
+          musnix.nixosModules.musnix
           ./configuration-desktop.nix
           home-manager.nixosModules.home-manager
           nix-flatpak.nixosModules.nix-flatpak

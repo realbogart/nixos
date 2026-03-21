@@ -71,7 +71,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   # 95 MB ESP is very small; keep only one generation to avoid boot entry copy failures.
   boot.loader.systemd-boot.configurationLimit = 1;
-
+  boot.kernelParams = [ "threadirqs" ];
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -170,6 +170,9 @@ in
   console.keyMap = "sv-latin1";
 
   # Enable sound with pipewire.
+  musnix.enable = true;
+  musnix.rtcqs.enable = true;
+  musnix.kernel.realtime = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -178,10 +181,71 @@ in
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     jack.enable = true;
+    extraConfig = {
+      pipewire."10-low-latency" = {
+        "context.properties" = {
+          "default.clock.rate" = 48000;
+          "default.clock.quantum" = 64;
+          "default.clock.min-quantum" = 64;
+          "default.clock.max-quantum" = 256;
+        };
+      };
+    };
+    wireplumber.extraConfig = {
+      "20-disable-non-ucx-audio" = {
+        "monitor.alsa.rules" = [
+          {
+            matches = [
+              {
+                "alsa.id" = "NVidia";
+              }
+              {
+                "device.name" = "alsa_card.pci-0000_01_00.1";
+              }
+            ];
+            actions = {
+              update-props = {
+                "device.disabled" = true;
+              };
+            };
+          }
+          {
+            matches = [
+              {
+                "alsa.id" = "M3";
+              }
+            ];
+            actions = {
+              update-props = {
+                "device.disabled" = true;
+              };
+            };
+          }
+        ];
+      };
+    };
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+  };
+
+  systemd.user.services.pipewire.serviceConfig = {
+    Nice = -11;
+    LimitRTPRIO = 95;
+    LimitMEMLOCK = "infinity";
+  };
+
+  systemd.user.services.pipewire-pulse.serviceConfig = {
+    Nice = -11;
+    LimitRTPRIO = 95;
+    LimitMEMLOCK = "infinity";
+  };
+
+  systemd.user.services.wireplumber.serviceConfig = {
+    Nice = -11;
+    LimitRTPRIO = 95;
+    LimitMEMLOCK = "infinity";
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -220,6 +284,8 @@ in
     lm_sensors
     nfs-utils
     qemu
+    usbutils
+    pciutils
     # nvidia-offload
 
     # Desktop apps
@@ -244,7 +310,6 @@ in
 
   # List services that you want to enable:
   services.cron.enable = true;
-
   services.udev.extraRules = ''
     # Rules for Oryx web flashing and live training
     KERNEL=="hidraw*", ATTRS{idVendor}=="16c0", MODE="0664", GROUP="plugdev"
