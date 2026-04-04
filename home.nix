@@ -22,6 +22,7 @@
     tmux
     rofi
     xdotool
+    gsimplecal
     nil
     vlc
     xsel
@@ -140,6 +141,8 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/alacritty";
     ".config/rofi".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/rofi";
+    ".config/gsimplecal/config".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/gsimplecal/config";
     ".config/dunst/dunstrc".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/dunst/dunstrc";
     ".config/xmonad/launcher-apps.tsv".source =

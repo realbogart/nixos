@@ -125,6 +125,19 @@ in
   ];
   services.flatpak.update.onActivation = false;
   services.flatpak.uninstallUnmanaged = true;
+  services.flatpak.overrides = {
+    "com.discordapp.Discord".Context = {
+      devices = [ "all" ];
+      shared = [
+        "ipc"
+        "network"
+      ];
+      sockets = [
+        "pulseaudio"
+        "x11"
+      ];
+    };
+  };
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
@@ -170,11 +183,13 @@ in
   console.keyMap = "sv-latin1";
 
   # Enable sound with pipewire.
+  services.pulseaudio.enable = false;
   musnix.enable = true;
   musnix.rtcqs.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
+    audio.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
@@ -200,18 +215,6 @@ in
               }
               {
                 "device.name" = "alsa_card.pci-0000_01_00.1";
-              }
-            ];
-            actions = {
-              update-props = {
-                "device.disabled" = true;
-              };
-            };
-          }
-          {
-            matches = [
-              {
-                "alsa.id" = "M3";
               }
             ];
             actions = {
