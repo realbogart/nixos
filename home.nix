@@ -21,6 +21,7 @@
     gnumake
     tmux
     rofi
+    picom
     xdotool
     gsimplecal
     nil
@@ -141,6 +142,8 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/alacritty";
     ".config/rofi".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/rofi";
+    ".config/picom/picom.conf".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/picom/picom.conf";
     ".config/gsimplecal/config".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/gsimplecal/config";
     ".config/dunst/dunstrc".source =
@@ -154,6 +157,7 @@
     ".xinitrc".text = ''
       export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:''${XDG_DATA_DIRS:-/run/current-system/sw/share:$HOME/.nix-profile/share:/usr/local/share:/usr/share}"
       exec /run/current-system/sw/bin/dbus-run-session ${pkgs.runtimeShell} -lc '
+        ${pkgs.picom}/bin/picom --config "$HOME/.config/picom/picom.conf" &
         exec /run/current-system/sw/bin/xmonad
       '
     '';
