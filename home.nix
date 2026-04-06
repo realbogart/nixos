@@ -22,6 +22,7 @@
     tmux
     rofi
     picom
+    hsetroot
     xdotool
     gsimplecal
     nil
@@ -59,8 +60,8 @@
     grpcurl
     wireguard-tools
     gh
-    neovim
     flameshot
+    pkgs-realbogart.neovim
     pkgs-realbogart.codex
     pkgs-realbogart.claude-code
     pkgs-realbogart.github-copilot-cli

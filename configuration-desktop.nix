@@ -166,6 +166,9 @@ in
   services.xserver.enable = true;
   services.displayManager.sddm.enable = false;
   services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.sessionCommands = ''
+    ${pkgs.picom}/bin/picom --config /home/johan/.config/picom/picom.conf &
+  '';
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "johan";
   services.xserver.windowManager.xmonad.enable = true;
