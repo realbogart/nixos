@@ -62,6 +62,7 @@
     gh
     flameshot
     pkgs-realbogart.neovim
+    pkgs-realbogart.tree-sitter
     pkgs-realbogart.codex
     pkgs-realbogart.claude-code
     pkgs-realbogart.github-copilot-cli
