@@ -6,7 +6,7 @@
 }:
 { config, pkgs, ... }:
 let
-  browserDesktop = "com.brave.Browser.desktop";
+  browserDesktop = "johan-brave-flatpak.desktop";
 in
 {
   home.username = "johan";
@@ -179,8 +179,22 @@ in
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/gsimplecal/config";
     ".config/dunst/dunstrc".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/dunst/dunstrc";
-    ".config/xmonad/launcher-apps.tsv".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/launcher-apps.tsv";
+    ".config/xmonad/launcher-apps.tsv".text = ''
+      # Label<TAB>Command<TAB>Icon
+      # :setlocal noexpandtab
+      Terminal: Alacritty	alacritty	Alacritty
+      btop	alacritty --class btop,btop -e sh -lc "btop"	Alacritty
+      Brave	$HOME/.local/bin/brave-flatpak	com.brave.Browser
+      Firefox	flatpak run org.mozilla.firefox	org.mozilla.firefox
+      Discord	flatpak run com.discordapp.Discord	com.discordapp.Discord
+      Signal	flatpak run org.signal.Signal	org.signal.Signal
+      Element	flatpak run im.riot.Riot	im.riot.Riot
+      Spotify	flatpak run com.spotify.Client	com.spotify.Client
+      WhatsApp	flatpak run com.rtosta.zapzap	com.rtosta.zapzap
+      Flatpak: Update all	alacritty -e sh -lc "flatpak update -y; printf '\nPress Enter to close...'; read -r _"	flatpak-update
+      Flatpak: List installed	alacritty -e sh -lc "flatpak list; printf '\nPress Enter to close...'; read -r _"	flatpak-list
+      REAPER	sh -lc "cd /home/johan/music/reaper-env && nohup direnv exec . ./scripts/run-reaper >/dev/null 2>&1 &"	audio-x-generic
+    '';
     ".xmonad/xmonad.hs".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/xmonad.hs";
     ".local/bin/rofi-launcher".source =
@@ -192,6 +206,38 @@ in
         ${pkgs.picom}/bin/picom --config "$HOME/.config/picom/picom.conf" &
         exec /run/current-system/sw/bin/xmonad
       '
+    '';
+    ".local/bin/brave-flatpak".text = ''
+      #!/bin/sh
+      exec flatpak run --branch=stable --arch=x86_64 --command=brave com.brave.Browser \
+        --disable-features=UseChromeOSDirectVideoDecoder,VaapiVideoDecoder,Vulkan \
+        --use-angle=gl --use-gl=angle "$@"
+    '';
+    ".local/bin/brave-flatpak".executable = true;
+    ".local/share/applications/johan-brave-flatpak.desktop".text = ''
+      [Desktop Entry]
+      Version=1.0
+      Name=Brave
+      GenericName=Web Browser
+      Comment=Access the Internet
+      StartupNotify=true
+      StartupWMClass=brave-browser
+      Exec=/home/johan/.local/bin/brave-flatpak @@u %U @@
+      Terminal=false
+      Icon=com.brave.Browser
+      Type=Application
+      Categories=Network;WebBrowser;
+      MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ipfs;x-scheme-handler/ipns;
+      Actions=new-window;new-private-window;new-tor-window;
+      X-Flatpak=com.brave.Browser
+
+      [Desktop Action new-window]
+      Name=New Window
+      Exec=/home/johan/.local/bin/brave-flatpak
+
+      [Desktop Action new-private-window]
+      Name=New Private Window
+      Exec=/home/johan/.local/bin/brave-flatpak --incognito
     '';
   };
 
