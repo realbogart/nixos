@@ -221,11 +221,11 @@
     },
     "nixpkgs-realbogart_2": {
       "locked": {
-        "lastModified": 1776588842,
-        "narHash": "sha256-kW7e/MvlEgMEYgxPz4o6Y3KJ/jGf8QUJJC7C0OxZINc=",
+        "lastModified": 1776984495,
+        "narHash": "sha256-0zG85YR67wLsV3r7ucAZsGiMP8hvPhJXq4FbQfHkqEM=",
         "owner": "realbogart",
         "repo": "nixpkgs",
-        "rev": "05ec7edb8e3ec309ab48f176ae4bf1553df05ed2",
+        "rev": "ed4ee36cea63c04ac98d9646aebed3daab547e75",
         "type": "github"
       },
       "original": {
