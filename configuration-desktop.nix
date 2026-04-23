@@ -143,16 +143,16 @@ in
     xdgOpenUsePortal = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-xapp
     ];
     config = {
       common.default = [
         "gtk"
-        "gnome"
+        "xapp"
       ];
       "none+xmonad".default = [
         "gtk"
-        "gnome"
+        "xapp"
       ];
     };
   };
