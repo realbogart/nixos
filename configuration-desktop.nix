@@ -167,6 +167,8 @@ in
   services.displayManager.sddm.enable = false;
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.displayManager.sessionCommands = ''
+    export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:${config.system.path}/share:''${XDG_DATA_DIRS:-}"
+    ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd XDG_DATA_DIRS || true
     ${pkgs.picom}/bin/picom --config /home/johan/.config/picom/picom.conf &
   '';
   services.displayManager.autoLogin.enable = true;

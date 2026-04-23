@@ -116,7 +116,7 @@
           ./configuration-monstret.nix
           home-manager.nixosModules.home-manager
           nix-flatpak.nixosModules.nix-flatpak
-          (johan-home { configName = "desktop"; })
+          (johan-home { configName = "monstret"; })
           nix-ld.nixosModules.nix-ld
           {
             programs.nix-ld.enable = true;

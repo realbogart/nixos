@@ -5,6 +5,9 @@
   pkgs-realbogart,
 }:
 { config, pkgs, ... }:
+let
+  browserDesktop = "com.brave.Browser.desktop";
+in
 {
   home.username = "johan";
   home.homeDirectory = "/home/johan";
@@ -118,11 +121,37 @@
       if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ ! "$TTY" =~ ^/dev/tty[0-9]+$ ]]; then
         exec tmux
       fi
+
+      update() {
+        local flake_target="$HOME/nixos#${configName}"
+        local log_file="/tmp/nixos-update-${configName}.log"
+
+        printf 'update debug: hostname=%s\n' "$(hostname)"
+        printf 'update debug: configName=%s\n' "${configName}"
+        printf 'update debug: flake target=%s\n' "$flake_target"
+        printf 'update debug: log file=%s\n' "$log_file"
+
+        sudo nixos-rebuild switch --flake "$flake_target" --show-trace 2>&1 | tee "$log_file"
+      }
     '';
 
     shellAliases = {
       ll = "ls -l";
-      update = "sudo nixos-rebuild switch --flake ~/nixos#${configName}";
+    };
+  };
+
+  xdg = {
+    enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = browserDesktop;
+        "application/xhtml+xml" = browserDesktop;
+        "x-scheme-handler/http" = browserDesktop;
+        "x-scheme-handler/https" = browserDesktop;
+        "x-scheme-handler/about" = browserDesktop;
+        "x-scheme-handler/unknown" = browserDesktop;
+      };
     };
   };
 
@@ -159,6 +188,7 @@
     ".xinitrc".text = ''
       export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:''${XDG_DATA_DIRS:-/run/current-system/sw/share:$HOME/.nix-profile/share:/usr/local/share:/usr/share}"
       exec /run/current-system/sw/bin/dbus-run-session ${pkgs.runtimeShell} -lc '
+        ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd XDG_DATA_DIRS || true
         ${pkgs.picom}/bin/picom --config "$HOME/.config/picom/picom.conf" &
         exec /run/current-system/sw/bin/xmonad
       '

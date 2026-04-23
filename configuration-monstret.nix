@@ -69,8 +69,8 @@ in
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # 95 MB ESP is very small; keep only one generation to avoid boot entry copy failures.
-  boot.loader.systemd-boot.configurationLimit = 1;
+  # Keep a few fallback generations available in the boot menu.
+  boot.loader.systemd-boot.configurationLimit = 5;
   boot.kernelParams = [ "threadirqs" ];
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -167,6 +167,8 @@ in
   services.displayManager.sddm.enable = false;
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.displayManager.sessionCommands = ''
+    export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:${config.system.path}/share:''${XDG_DATA_DIRS:-}"
+    ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd XDG_DATA_DIRS || true
     ${pkgs.picom}/bin/picom --config /home/johan/.config/picom/picom.conf &
   '';
   services.displayManager.autoLogin.enable = true;
