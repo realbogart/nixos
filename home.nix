@@ -64,6 +64,7 @@ in
     wireguard-tools
     gh
     flameshot
+    copyq
     brave
     pkgs-realbogart.neovim
     pkgs-realbogart.tree-sitter
