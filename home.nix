@@ -6,7 +6,7 @@
 }:
 { config, pkgs, ... }:
 let
-  browserDesktop = "johan-brave-flatpak.desktop";
+  browserDesktop = "brave-browser.desktop";
 in
 {
   home.username = "johan";
@@ -64,6 +64,7 @@ in
     wireguard-tools
     gh
     flameshot
+    brave
     pkgs-realbogart.neovim
     pkgs-realbogart.tree-sitter
     pkgs-realbogart.codex
@@ -184,7 +185,7 @@ in
       # :setlocal noexpandtab
       Terminal: Alacritty	alacritty	Alacritty
       btop	alacritty --class btop,btop -e sh -lc "btop"	Alacritty
-      Brave	$HOME/.local/bin/brave-flatpak	com.brave.Browser
+      Brave	brave	brave-browser
       Firefox	flatpak run org.mozilla.firefox	org.mozilla.firefox
       Discord	flatpak run com.discordapp.Discord	com.discordapp.Discord
       Signal	flatpak run org.signal.Signal	org.signal.Signal
@@ -206,38 +207,6 @@ in
         ${pkgs.picom}/bin/picom --config "$HOME/.config/picom/picom.conf" &
         exec /run/current-system/sw/bin/xmonad
       '
-    '';
-    ".local/bin/brave-flatpak".text = ''
-      #!/bin/sh
-      exec flatpak run --branch=stable --arch=x86_64 --command=brave com.brave.Browser \
-        --disable-features=UseChromeOSDirectVideoDecoder,VaapiVideoDecoder,Vulkan \
-        --use-angle=gl --use-gl=angle "$@"
-    '';
-    ".local/bin/brave-flatpak".executable = true;
-    ".local/share/applications/johan-brave-flatpak.desktop".text = ''
-      [Desktop Entry]
-      Version=1.0
-      Name=Brave
-      GenericName=Web Browser
-      Comment=Access the Internet
-      StartupNotify=true
-      StartupWMClass=brave-browser
-      Exec=/home/johan/.local/bin/brave-flatpak @@u %U @@
-      Terminal=false
-      Icon=com.brave.Browser
-      Type=Application
-      Categories=Network;WebBrowser;
-      MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ipfs;x-scheme-handler/ipns;
-      Actions=new-window;new-private-window;new-tor-window;
-      X-Flatpak=com.brave.Browser
-
-      [Desktop Action new-window]
-      Name=New Window
-      Exec=/home/johan/.local/bin/brave-flatpak
-
-      [Desktop Action new-private-window]
-      Name=New Private Window
-      Exec=/home/johan/.local/bin/brave-flatpak --incognito
     '';
   };
 

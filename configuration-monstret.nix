@@ -118,7 +118,6 @@ in
   services.flatpak.enable = true;
   services.flatpak.packages = [
     "org.mozilla.firefox"
-    "com.brave.Browser"
     "com.spotify.Client"
     "com.discordapp.Discord"
     "im.riot.Riot"
