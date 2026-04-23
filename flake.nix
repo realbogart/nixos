@@ -70,6 +70,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./modules/base.nix
+          ./modules/nix-developer-trust.nix
           ./configuration-wsl.nix
           NixOS-WSL.nixosModules.wsl
           home-manager.nixosModules.home-manager
@@ -91,6 +92,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./modules/base.nix
+          ./modules/nix-developer-trust.nix
           musnix.nixosModules.musnix
           ./configuration-desktop.nix
           home-manager.nixosModules.home-manager
@@ -112,6 +114,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./modules/base.nix
+          ./modules/nix-developer-trust.nix
           musnix.nixosModules.musnix
           ./configuration-monstret.nix
           home-manager.nixosModules.home-manager
