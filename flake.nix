@@ -107,5 +107,26 @@
           }
         ];
       };
+      nixosConfigurations.monstret = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./modules/base.nix
+          musnix.nixosModules.musnix
+          ./configuration-monstret.nix
+          home-manager.nixosModules.home-manager
+          nix-flatpak.nixosModules.nix-flatpak
+          (johan-home { configName = "desktop"; })
+          nix-ld.nixosModules.nix-ld
+          {
+            programs.nix-ld.enable = true;
+            programs.nix-ld.dev.enable = false;
+            programs.nix-ld.libraries = with pkgs; [
+              stdenv.cc.cc
+              libz
+            ];
+          }
+        ];
+      };
     };
 }
