@@ -141,8 +141,20 @@ in
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.default = "*";
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
+    ];
+    config = {
+      common.default = [
+        "gtk"
+        "gnome"
+      ];
+      "none+xmonad".default = [
+        "gtk"
+        "gnome"
+      ];
+    };
   };
 
   # Set your time zone.
