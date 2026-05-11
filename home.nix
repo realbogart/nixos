@@ -66,6 +66,7 @@ in
     flameshot
     copyq
     brave
+    lldpd
     pkgs-realbogart.neovim
     pkgs-realbogart.tree-sitter
     pkgs-realbogart.codex

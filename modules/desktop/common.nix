@@ -46,6 +46,7 @@
   networking.networkmanager.unmanaged = [ "type:wifi" ];
 
   time.timeZone = "Europe/Stockholm";
+  time.hardwareClockInLocalTime = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
 
