@@ -17,6 +17,12 @@
 
   networking.hostName = "monstret";
 
+  services.openssh = {
+    enable = true;
+    openFirewall = true;
+    settings.AuthenticationMethods = "publickey";
+  };
+
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaSettings = true;

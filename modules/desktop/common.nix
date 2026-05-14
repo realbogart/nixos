@@ -108,10 +108,12 @@
   '';
 
   services.openssh = {
-    enable = false;
+    enable = lib.mkDefault false;
     settings = {
       PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
+      PubkeyAuthentication = true;
     };
   };
 
