@@ -31,6 +31,7 @@ in
     nil
     vlc
     xsel
+    xclip
     xbanish
     dunst
     libnotify
