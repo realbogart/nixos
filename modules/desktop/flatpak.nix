@@ -8,6 +8,7 @@
     "im.riot.Riot"
     "org.signal.Signal"
     "com.rtosta.zapzap"
+    "com.valvesoftware.Steam"
   ];
   services.flatpak.update.onActivation = false;
   services.flatpak.uninstallUnmanaged = true;
