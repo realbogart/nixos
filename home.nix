@@ -71,7 +71,7 @@ in
     pkgs-realbogart.neovim
     pkgs-realbogart.tree-sitter
     pkgs-realbogart.codex
-    pkgs-realbogart.claude-code
+    claude-code
     pkgs-realbogart.github-copilot-cli
     nix-yaml.packages.${pkgs.stdenv.hostPlatform.system}.yaml
     nix-azure-pipelines-language-server.packages.${pkgs.stdenv.hostPlatform.system}.azure-pipelines-language-server

@@ -10,6 +10,7 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ (import ../overlays) ];
 
   virtualisation.docker.enable = true;
 
