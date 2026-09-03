@@ -1,0 +1,15 @@
+{
+  "version": "0.153.0",
+  "platforms": {
+    "aarch64-linux": {
+      "target": "aarch64-unknown-linux-musl",
+      "codexChecksum": "29976c8c33c0464914639edc12dd75f102f38d20c181ff59355c8af98fd78ce0",
+      "codeModeHostChecksum": "4bf94e33301e566584cecba18d26e8def2921a5417a8255b4ac24665dc6ac5b2"
+    },
+    "x86_64-linux": {
+      "target": "x86_64-unknown-linux-musl",
+      "codexChecksum": "d9da04b33d6070ed3d52b8992099a3510d496ef1a93e0ecb2a7489628e0af7e4",
+      "codeModeHostChecksum": "55132c1ff0c29e479d31200e58185e4c098607c8628284c80018fc4077bab985"
+    }
+  }
+}

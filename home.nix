@@ -70,7 +70,7 @@ in
     lldpd
     pkgs-realbogart.neovim
     pkgs-realbogart.tree-sitter
-    pkgs-realbogart.codex
+    codex
     claude-code
     pkgs-realbogart.github-copilot-cli
     nix-yaml.packages.${pkgs.stdenv.hostPlatform.system}.yaml
