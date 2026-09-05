@@ -67,6 +67,7 @@ in
     flameshot
     copyq
     brave
+    chatgpt
     lldpd
     pkgs-realbogart.neovim
     pkgs-realbogart.tree-sitter
@@ -189,6 +190,7 @@ in
       Terminal: Alacritty	alacritty	Alacritty
       btop	alacritty --class btop,btop -e sh -lc "btop"	Alacritty
       Brave	brave	brave-browser
+      ChatGPT	chatgpt	chatgpt
       Firefox	flatpak run org.mozilla.firefox	org.mozilla.firefox
       Discord	flatpak run com.discordapp.Discord	com.discordapp.Discord
       Signal	flatpak run org.signal.Signal	org.signal.Signal
