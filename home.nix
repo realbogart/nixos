@@ -34,6 +34,7 @@ in
 {
   home.username = "johan";
   home.homeDirectory = "/home/johan";
+  home.sessionPath = [ "$HOME/.local/bin" ];
 
   home.packages = with pkgs; [
     git
