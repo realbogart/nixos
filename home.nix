@@ -7,6 +7,29 @@
 { config, pkgs, ... }:
 let
   browserDesktop = "brave-browser.desktop";
+  screenCapture = pkgs.writeShellApplication {
+    name = "screen-capture";
+    runtimeInputs = with pkgs; [
+      bash
+      coreutils
+      diffutils
+      gnugrep
+      util-linux
+      maim
+      slop
+      flameshot
+      xclip
+      ffmpeg-full
+      pulseaudio
+      libnotify
+      systemd
+      xdotool
+      xdg-user-dirs
+    ];
+    text = ''
+      exec bash /home/johan/dotfiles/xmonad/screen-capture "$@"
+    '';
+  };
 in
 {
   home.username = "johan";
@@ -206,6 +229,7 @@ in
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/xmonad.hs";
     ".local/bin/rofi-launcher".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/xmonad/rofi-launcher";
+    ".local/bin/screen-capture".source = "${screenCapture}/bin/screen-capture";
     ".xinitrc".text = ''
       export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:''${XDG_DATA_DIRS:-/run/current-system/sw/share:$HOME/.nix-profile/share:/usr/local/share:/usr/share}"
       exec /run/current-system/sw/bin/dbus-run-session ${pkgs.runtimeShell} -lc '
