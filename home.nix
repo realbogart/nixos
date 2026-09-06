@@ -53,6 +53,7 @@ in
     gsimplecal
     nil
     vlc
+    feh
     xsel
     xclip
     xbanish
