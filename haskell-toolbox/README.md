@@ -45,7 +45,26 @@ For a temporary shell before system activation:
 nix develop ~/nixos#haskell-toolbox
 ```
 
+## Run automatically on save
+
+In a second terminal (or tmux pane), start:
+
+```sh
+ghcid --command="ghci -ignore-dot-ghci script.hs" --test=main --warnings
+```
+
+This keeps GHCi running, watches the script and loaded local modules, reloads
+on save, and runs `main` after each successful reload. Type errors are shown
+instead of running; `--warnings` allows execution when there are only warnings.
+Changes must be saved to disk. Stop the watcher with Ctrl-C.
+
+For typechecking only, omit `--test=main --warnings`. To pass script arguments,
+use `--test=':main argument1 argument2'`. Relative file operations use the
+terminal's working directory. Add `--reload=input.json` to also watch a data
+file. Restart ghcid after installing a changed toolbox dependency set.
+
 ## Add or change libraries
+
 
 1. Edit `build-depends` in `haskell-toolbox.cabal` (for example, add `aeson`).
 2. Add any Git source overrides to `cabal.project`.

@@ -32,12 +32,12 @@
 
 stdenv.mkDerivation {
   pname = "chatgpt";
-  version = "26.901.51231";
+  version = "26.915.31945";
 
   # Official Linux preview. The hash pins the download even if latest changes.
   src = fetchurl {
     url = "https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb";
-    hash = "sha256-YlgBiNh8PTqTadq3xztCqKMlGNTfii1brmRm3erFwF4=";
+    hash = "sha256-0nqcApGc/khNzF80WEueqf0NemXGncyHK1vc+g77WYM=";
   };
 
   nativeBuildInputs = [

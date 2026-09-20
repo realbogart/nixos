@@ -29,6 +29,7 @@ let
       hls
       cabal
       pkgs.ormolu
+      pkgs.ghcid
     ];
   };
 in
