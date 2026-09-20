@@ -1,0 +1,10 @@
+packages: .
+index-state: 2026-09-19T00:00:00Z
+
+-- Add selected Git overrides here. Use a full commit and nix-prefetch-git's
+-- sha256 value (see README.md), rather than a moving branch or tag.
+-- source-repository-package
+--   type: git
+--   location: https://github.com/OWNER/REPOSITORY
+--   tag: FULL_COMMIT_HASH
+--   --sha256: CONTENT_HASH

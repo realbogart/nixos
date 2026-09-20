@@ -1,0 +1,22 @@
+cabal-version: 3.0
+name: haskell-toolbox
+version: 0.1.0.0
+build-type: Simple
+license: BSD-3-Clause
+synopsis: Shared dependencies for standalone Haskell scripts
+
+library
+  exposed-modules: Toolbox
+  hs-source-dirs: src
+  default-language: GHC2021
+  build-depends:
+    base,
+    text,
+    bytestring,
+    containers,
+    directory,
+    filepath,
+    process,
+    time,
+    mtl,
+    transformers

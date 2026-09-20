@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-realbogart.url = "github:realbogart/nixpkgs";
+    haskellNix.url = "github:input-output-hk/haskell.nix/84d5f02893f4e5c00696cadbc8c36471be7307fa";
     # nixpkgs.url = "github:realbogart/nixpkgs/24.05-johan";
     NixOS-WSL = {
       url = "github:nix-community/NixOS-WSL";
@@ -35,6 +36,7 @@
       nix-azure-pipelines-language-server,
       nix-yaml,
       nixpkgs-realbogart,
+      haskellNix,
       ...
     }@inputs:
     let
@@ -47,6 +49,12 @@
         inherit system;
         config.allowUnfree = true;
       };
+      haskellPkgs = import haskellNix.inputs.nixpkgs-unstable {
+        inherit system;
+        overlays = [ haskellNix.overlay ];
+        inherit (haskellNix) config;
+      };
+      haskellToolbox = import ./haskell-toolbox { pkgs = haskellPkgs; };
       johan-home =
         {
           configName ? "default",
@@ -60,12 +68,15 @@
               nix-yaml
               nix-azure-pipelines-language-server
               pkgs-realbogart
+              haskellToolbox
               ;
           };
         };
     in
     {
       overlays.default = import ./overlays;
+      packages.${system}.haskell-toolbox = haskellToolbox.package;
+      devShells.${system}.haskell-toolbox = haskellToolbox.shell;
 
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

@@ -3,6 +3,7 @@
   nix-yaml,
   nix-azure-pipelines-language-server,
   pkgs-realbogart,
+  haskellToolbox,
 }:
 { config, pkgs, ... }:
 let
@@ -37,6 +38,7 @@ in
   home.sessionPath = [ "$HOME/.local/bin" ];
 
   home.packages = with pkgs; [
+    haskellToolbox.package
     git
     git-lfs
     zip
