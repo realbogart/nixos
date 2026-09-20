@@ -19,4 +19,5 @@ library
     process,
     time,
     mtl,
-    transformers
+    transformers,
+    h-raylib

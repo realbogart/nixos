@@ -9,6 +9,21 @@ let
     compiler-nix-name = compiler;
     # Current haskell.nix deliberately does not auto-load this file.
     cabalProjectFreeze = builtins.readFile ./cabal.project.freeze;
+    modules = [
+      {
+        # h-raylib bundles raylib/GLFW; map its Linux linker dependencies
+        # explicitly (haskell.nix has no mapping for libc's "c", "m", etc.).
+        packages.h-raylib.components.library.libs = pkgs.lib.mkForce [
+          pkgs.glibc
+          pkgs.libGL
+          pkgs.libx11
+          pkgs.libxinerama
+          pkgs.libxcursor
+          pkgs.libxrandr
+          pkgs.libxi
+        ];
+      }
+    ];
   };
   # ghcWithPackages includes every GHC-bundled library. That makes a Git
   # replacement of e.g. mtl ambiguous. Expose only the solved dependency set.
