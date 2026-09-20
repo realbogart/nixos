@@ -1,0 +1,4 @@
+interface:
+  display_name: "Haskell Scratch"
+  short_description: "Prototype and check ideas with standalone Haskell"
+  default_prompt: "Use $haskell-scratch to prototype this idea and verify it with executable examples."
