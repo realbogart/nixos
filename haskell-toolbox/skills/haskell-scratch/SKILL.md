@@ -1,6 +1,6 @@
 ---
 name: haskell-scratch
-description: Write and run standalone Haskell scripts using Johan's shared Nix toolbox for quick prototypes, data transformations, algorithm experiments, and executable checks. Use when Haskell is requested or its types and pure functions materially help a scratch task; preserve existing project workflows for application development.
+description: Write and run standalone Haskell scripts using Johan's shared Nix toolbox for quick prototypes, graphical apps with h-raylib and live reload, data transformations, algorithm experiments, and executable checks. Use when Haskell is requested or its types and pure functions materially help a scratch task; preserve existing project workflows for application development.
 ---
 
 # Haskell scratch
@@ -79,6 +79,15 @@ Preserve unrelated pins. Do not use `cabal install --lib` or create global GHC
 package environments as a workaround. The Nix definition explicitly loads
 the freeze file and uses `shellFor` with `exactDeps = true` to avoid ambiguous
 imports from duplicate bundled and Git-pinned libraries; retain that behavior.
+
+## Graphical prototypes
+
+For standalone graphical apps, h-raylib and foreign-store are available in
+the shared toolbox. Read [the graphics guide](references/graphics.md) and
+adapt the [starter files](assets/raylib/) when a window or live graphical
+iteration is wanted. The starter's `mainDev` swaps drawing code without
+recreating the window, OpenGL context, or animation clock. Use this entry
+point for live graphics rather than repeatedly running `main`.
 
 ## Live iteration when useful
 

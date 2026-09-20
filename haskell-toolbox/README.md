@@ -47,6 +47,11 @@ nix develop ~/nixos#haskell-toolbox
 
 ## Run automatically on save
 
+For graphical prototypes with a window that survives edits, see the
+[h-raylib live-reload guide](skills/haskell-scratch/references/graphics.md).
+It includes copyable starter files and uses `mainDev` to replace drawing
+code while preserving the window and animation clock.
+
 In a second terminal (or tmux pane), start:
 
 ```sh
