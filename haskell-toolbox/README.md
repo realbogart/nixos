@@ -45,6 +45,31 @@ For a temporary shell before system activation:
 nix develop ~/nixos#haskell-toolbox
 ```
 
+## Jev decisions
+
+`import Jev` is available to standalone scripts. Jev is pinned to the Git
+commit for release `0.1.0.0` in `cabal.project`, so toolbox builds do not depend
+on its Hackage publication. Updating the pin requires updating the content hash
+and regenerating the freeze file as described below.
+
+The release declares GHC 9.10 bounds. The toolbox relaxes only `jev:base` and
+`jev:containers` for GHC 9.14; unrelated dependency bounds remain enforced.
+
+This example checks a question locally without credentials or an API call:
+
+```haskell
+{-# LANGUAGE OverloadedStrings #-}
+import Jev
+
+main :: IO ()
+main = print (validateQuestion TypeSafe (noul "Does this need a human?"))
+```
+
+Save it as `check-jev.hs` and run `runghc check-jev.hs` after activating the
+updated system, or run it through `nix develop ~/nixos#haskell-toolbox --command
+runghc check-jev.hs` beforehand. For real requests, pass your API key explicitly
+to `defaultConfig`; `decide` performs a billable request.
+
 ## Run automatically on save
 
 For graphical prototypes with a window that survives edits, see the

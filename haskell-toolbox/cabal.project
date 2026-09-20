@@ -1,6 +1,16 @@
 packages: .
 index-state: 2026-09-19T00:00:00Z
 
+-- Jev 0.1.0.0 targets GHC 9.10; allow the toolbox's GHC 9.14 bundled
+-- base and containers. Keep these exceptions scoped to this pinned library.
+allow-newer: jev:base, jev:containers
+
+source-repository-package
+  type: git
+  location: https://github.com/realbogart/jev.git
+  tag: 30875047f9adf9b235d20e06c8afdbeef4cdeb81
+  --sha256: 1hz5gb23k4r8rxxmx8a9yf17dhgwdpaam5p3jp1xxwgh4vrcknax
+
 package h-raylib
   -- Support interpreted scratch scripts without pulling in optional lenses.
   flags: +ghci +disable-lens

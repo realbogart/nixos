@@ -20,5 +20,6 @@ library
     time,
     mtl,
     transformers,
+    jev,
     h-raylib,
     foreign-store
