@@ -87,6 +87,22 @@ closing the window. Avoid allocating them every frame. Keep raylib calls
 out of the REPL-side reload branch; route updates through the callback or
 an explicit command queue as the app grows.
 
+## Pitfalls (verified on h-raylib 6.1.0.0 +disable-lens)
+
+- Constructing `Vector2`: the name is a bidirectional pattern synonym, but
+  its constructor side is only visible through a **whole-module** import of
+  `Raylib.Types.Core`. A selective list — even
+  `import Raylib.Types.Core (Vector2)` — imports only the type, producing
+  `Data constructor out of scope: 'Vector2'` (GHC-01928). The clean fix is
+  `import qualified Raylib.Types.Core as RC` and building `RC.Vector2 x y`
+  (Float fields; wrap Double values with `realToFrac`). In 6.x,
+  `closeWindow` takes `Maybe WindowResources` (use `Nothing` for the
+  current window).
+- Face culling: raylib culls clockwise faces. `drawTriangle` vertices must
+  wind **counter-clockwise in screen space** (y grows downward); otherwise
+  the triangle silently vanishes with no error. Verify custom polygons in
+  the `--smoke-test` screenshot (pixel colors), not by eye alone.
+
 Escape closes the window; saving a valid edit opens a fresh one. Ctrl-C
 stops the watcher and its GHCi process. In a manual GHCi session, `stopDev`
 requests shutdown on the rendering thread and waits for cleanup. Stop
