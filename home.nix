@@ -45,6 +45,7 @@ in
     unzip
     ripgrep
     fzf
+    glow
     btop
     clang
     gnumake
