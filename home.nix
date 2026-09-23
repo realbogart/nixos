@@ -84,6 +84,7 @@ in
     wget
     pinta
     gimp
+    kdePackages.ghostwriter
     gemini-cli
     unrar
     nix-prefetch-scripts
