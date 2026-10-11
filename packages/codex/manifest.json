@@ -1,15 +1,15 @@
 {
-  "version": "0.160.0",
+  "version": "0.162.1",
   "platforms": {
     "aarch64-linux": {
       "target": "aarch64-unknown-linux-musl",
-      "codexChecksum": "fb6c7eb514bce6e87b70ea0cd5c5cd5e4f49212442ba16ef475d3035d7507161",
-      "codeModeHostChecksum": "64d31978692f9b327c9233edf863950e1f73866f91b5917f573c47f9f8e6983f"
+      "codexChecksum": "ed893c7b0eb337621590c433aa2ca90b7a7f66f189530bb23b1c52814c24b677",
+      "codeModeHostChecksum": "4ac49738cb76e78658acf3fa315a848dca011dbb73862854b5c3ef987d695a26"
     },
     "x86_64-linux": {
       "target": "x86_64-unknown-linux-musl",
-      "codexChecksum": "0b9dc4f01e700554ed1ade7e447167164e3049ac98994e9177810eb4d6c6091a",
-      "codeModeHostChecksum": "bce9e83f45a0e53d64449db0a1e56c22b7f1292fd49a674817efaa9107654a65"
+      "codexChecksum": "b6f2f01c7bf70e85306f47390b6f17b8ffdaf50135d48960a35dc456ff97e05b",
+      "codeModeHostChecksum": "2b09d17190537dcf0791960f5fdf9ac30a6e2573fb2bfb6616a4c44c409e2d26"
     }
   }
 }
